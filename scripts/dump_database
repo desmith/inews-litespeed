@@ -1,0 +1,8 @@
+echo "Exporting iskconnews from mysql.iskconnews.org..."
+
+mysqldump -h mysql.iskconnews.org -u icgroot -p --databases iskconnews > ./sql/iskconnews.sql
+
+echo "database exported:"
+
+ls -la ./sql
+

@@ -1,0 +1,240 @@
+/* ===== @import font-family ====== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+$allFontWeight:(
+    t   :  100,  // thin
+    el  :  200,  // extra light
+    l   :  300,  // light
+    r   :  400,  // regular
+    m   :  500,  // medium
+    sb  :  600,  // semi bold
+    b   :  700,  // bold
+    eb  :  800,  // extra bold
+    blk :  900   // black
+);
+
+@mixin fw($key) {
+    font-weight: map-get($allFontWeight, $key);
+}
+
+//-- FONT WEIGHT CLASS --//
+@each $fwName, $fwValue in $allFontWeight{
+    .fw--#{$fwName}{
+        font-weight: $fwValue !important;
+    }
+}
+
+:root{
+    --ff: 'Montserrat', sans-serif;
+}
+
+.ls{
+    letter-spacing: 0.15em;
+}
+
+
+.desc{
+    ul, ol{
+        padding-left: 20px;
+        li:not(:last-child){
+            margin-bottom: 1em;
+        }
+    }
+    *{
+        line-height: inherit;
+        font: inherit;
+    }
+}
+
+.fs--root{
+    font-size: 1rem !important;
+}
+
+
+strong{
+    @include fw(sb);
+}
+
+b{
+    @include fw(b);
+}
+
+@mixin font-45B(){
+    font-size: 45px;
+    @include fw(b);
+    @media(max-width:1699px){
+        font-size: 36px;
+    }
+
+}
+@mixin font-30(){
+    font-size: 30px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 26px;
+    }
+}
+@mixin font-30M(){
+    font-size: 30px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 26px;
+    }
+}
+@mixin font-30SB(){
+    font-size: 30px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 26px;
+    }
+}
+@mixin font-25(){
+    font-size: 25px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 22px;
+    }
+}
+@mixin font-25M(){
+    font-size: 25px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 22px;
+    }
+    
+}
+@mixin font-25SB(){
+    font-size: 25px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 22px;
+    }
+}
+@mixin font-22(){
+    font-size: 22px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    @media(max-width:1399px){
+        font-size: 18px;
+        line-height: 1.6;
+    }
+}
+@mixin font-22M(){
+    font-size: 22px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    @media(max-width:1399px){
+        font-size: 18px;
+        line-height: 1.6;
+    }
+}
+@mixin font-22SB(){
+    font-size: 22px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    @media(max-width:1399px){
+        font-size: 18px;
+        line-height: 1.6;
+    }
+}
+@mixin font-20(){
+    font-size: 20px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 18px;
+    }
+}
+@mixin font-20M(){
+    font-size: 20px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 18px;
+    }
+}
+@mixin font-20SB(){
+    font-size: 20px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 18px;
+    }
+}
+@mixin font-18(){
+    font-size: 18px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 16px;
+    }
+}
+@mixin font-18M(){
+    font-size: 18px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 16px;
+    }
+}
+@mixin font-18SB(){
+    font-size: 18px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 16px;
+    }
+}
+@mixin font-16(){
+    font-size: 16px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 14px;
+    }
+}
+@mixin font-16M(){
+    font-size: 16px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 14px;
+    }
+}
+@mixin font-16SB(){
+    font-size: 16px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 14px;
+    }
+}
+@mixin font-16B(){
+    font-size: 16px;
+    @include fw(b);
+    @media(max-width:1699px){
+        font-size: 14px;
+    }
+}
+@mixin font-14(){
+    font-size: 14px;
+    @include fw(r);
+    @media(max-width:1699px){
+        font-size: 12px;
+    }
+}
+@mixin font-14M(){
+    font-size: 14px;
+    @include fw(m);
+    @media(max-width:1699px){
+        font-size: 12px;
+    }
+}
+@mixin font-14SB(){
+    font-size: 14px;
+    @include fw(sb);
+    @media(max-width:1699px){
+        font-size: 12px;
+    }
+}

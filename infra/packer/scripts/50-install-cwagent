@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e -o pipefail      # exit if there are any errors
+export PATH=/usr/local/bin:$PATH
+
+echo "********************* 50-install-cwagent *********************"
+
+# This is a workaround for a bug in the CloudWatch Agent, which needs the ~/.aws/config to be present
+# (even if empty) in order to install the agent
+ROOT_AWS_HOME=/root/.aws
+mkdir -p $ROOT_AWS_HOME
+mv /tmp/aws_config $ROOT_AWS_HOME/config
+mv /tmp/aws_credentials $ROOT_AWS_HOME/credentials
+chmod 0600 $ROOT_AWS_HOME/config $ROOT_AWS_HOME/credentials
+
+echo "Installing CloudWatch Agent..."
+wget https://amazoncloudwatch-agent.s3.amazonaws.com/centos/amd64/latest/amazon-cloudwatch-agent.rpm
+rpm -U ./amazon-cloudwatch-agent.rpm
+rm -f ./amazon-cloudwatch-agent.rpm
+
+echo "Configuring CloudWatch Agent..."
+config_path='/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json'
+mv -f /tmp/amazon-cloudwatch-agent.json $config_path
+#aws ssm get-parameter --name "AmazonCloudWatch-linux" --query "Parameter.Value" --output text > $config_path
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:$config_path
+
+# Remove the (empty) AWS credentials so the instance Role will be used going forward
+rm -rf /root/.aws

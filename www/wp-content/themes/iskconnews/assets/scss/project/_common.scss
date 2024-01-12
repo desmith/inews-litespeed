@@ -1,0 +1,62 @@
+@import '../abstracts/mixin';
+@import '../abstracts/flex-mixin';
+@import './colors';
+@import './typo';
+
+.main-container {
+    width: 100%;
+    max-width: var(--maxContWidth);
+    padding: 0 15px;
+    margin: 0 auto;
+    // @media (min-width: 1100px) {
+    //     --maxContWidth: 1030px;
+    // }
+    @media(min-width:320px){
+        --maxContWidth: 1300px;
+    }
+
+    @media (min-width: 1300px) {
+        --maxContWidth: 1300px;
+    }
+    @media (min-width: 1400px) {
+        --maxContWidth: 1400px;
+    }
+    @media (min-width: 1700px) {
+        --maxContWidth: 1630px;
+    }
+}
+
+
+
+header{
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: color(white);
+    z-index: 2;
+    border-bottom: 1px solid color(dgray);
+    // padding: 1em 0;
+    .inner-container{
+        @include d-flex(r, fs, c);
+    }
+
+    nav{
+        // margin-left: auto;
+        margin-right: 40px;
+        @media (max-width: 1240px){
+            margin-right: 20px;
+        }
+        @media (max-width: 1069px){
+            margin-right: 0;
+        }
+    }
+
+    .nav_btnG{
+        margin-left: auto;
+        @media (max-width: 1069px){
+            margin-left: 0;
+        }
+    }
+
+}

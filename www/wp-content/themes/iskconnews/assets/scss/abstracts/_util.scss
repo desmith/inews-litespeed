@@ -1,0 +1,287 @@
+@import './mixin';
+@import '../project/colors';
+@import '../project/typo';
+
+//-- GENERTAE BACKGROUND AND TEXT COLOR --//
+@each $colorName, $colorValue in $allColors{
+    .bg--#{$colorName}{
+        background-color: $colorValue !important;
+    }
+    .c--#{$colorName}{
+      color: $colorValue !important;
+    }
+
+    .hvr\:bg--#{$colorName}{
+        &:hover, &:focus{
+            background-color: $colorValue !important;
+        }
+    }
+    .hvr\:c--#{$colorName}{
+        &:hover, &:focus{
+            color: $colorValue !important;
+            path, rect, polygon{
+                fill: $colorValue !important;
+            }
+        }
+    }
+}
+
+
+
+
+//-- DISPLAY --//
+$displays: (
+    none,
+    block,
+    inline-block,
+    flex,
+    inline-flex,
+    grid,
+    inline-grid
+);
+
+@each $display in $displays {
+    .d-#{$display}{
+        display: $display !important;
+    }
+}
+
+
+
+//-- MARGIN AND PADDING --//
+$gaps:(
+    auto, 0, 1, 2, 3
+);
+
+$gap-dir:(
+    'l': left,
+    'r': right,
+    't': top,
+    'b': bottom
+);
+
+
+.m-0{
+    margin: 0 !important;
+}
+.p-0{
+    padding: 0 !important;
+}
+
+@each $pos, $dir in $gap-dir{
+    @each $gap in $gaps{
+        @if($gap == 'auto'){
+            // 'auto' applies for margin only
+            .m#{$pos}-#{$gap}{
+                margin-#{$dir}: $gap !important;
+            }
+        }
+        @else{
+            // other value for both margin and padding
+            .m#{$pos}-#{$gap}{
+                margin-#{$dir}: #{$gap}rem !important;
+            }
+            .p#{$pos}-#{$gap}{
+                padding-#{$dir}: #{$gap}rem !important;
+            }
+        }
+    }
+}
+
+
+// BORDER
+@each $pos, $dir in $gap-dir{
+    .b#{$pos}-0{
+        border-#{$dir}: none !important;
+    }
+}
+
+
+
+// FLOAT AND CLEAR
+.fl-left{
+    float: left;
+}
+.fl-right{
+    float: right;
+}
+.cfix{
+    @include clearfix();
+}
+
+
+
+//-- TEXT ALIGN --//
+$text-align:(
+    left,
+    right,
+    center,
+    justify
+);
+
+
+@each $ta in $text-align{
+    .text-#{$ta}{
+        text-align: $ta;
+    }
+}
+
+
+
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+
+.w-100{
+    width: 100%;
+    flex: 0 0 100%;
+}
+
+.w-50{
+    width: 50%;
+}
+
+.w-1\/2{
+    width: 48% !important;
+    flex: 0 0 48% !important;
+}
+
+.fullH{
+    @include fullH();
+}
+
+.rounded{
+    border-radius: 50%;
+}
+
+.colspan-2{
+    grid-column: 1/-1;
+}
+
+.posiR{
+    position: relative;
+}
+
+.posiA{
+    position: absolute;
+}
+
+.posi-left{
+    left: 0;
+}
+.posi-top{
+    top: 0;
+}
+.posi-bottom{
+    bottom: 0;
+}
+.posi-right{
+    right: 0;
+}
+
+
+
+
+.flow-rootx > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.flow-rootx2 > *:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+
+.flow-rootx3 > *:not(:last-child) {
+  margin-bottom: 0.4rem;
+}
+
+.flow-root > *:not(:last-child) {
+  margin-bottom: 1.5rem;
+  @media (max-width: 575px) {
+    margin-bottom: 1rem;
+  }
+}
+
+.flow-rootX2 > *:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.flow-rootX3 > *:not(:last-child) {
+  margin-bottom: 3rem;
+  @media (max-width: 575px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.flow-rootX4 > *:not(:last-child) {
+    margin-bottom: 4rem;
+    @media (max-width: 575px) {
+      margin-bottom: 2rem;
+    }
+}
+
+.flow-rootX6 > *:not(:last-child) {
+    margin-bottom: 6rem;
+    @media (max-width: 575px) {
+      margin-bottom: 3rem;
+    }
+}
+
+
+.flow-rootRx2 > *:not(:last-child) {
+  margin-right: 0.8rem;
+}
+
+.flow-rootR > *:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.flow-rootRX2 > *:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.flow-rootRX3 > *:not(:last-child) {
+  margin-right: 3rem;
+}
+
+.flow-rootP > *:not(:last-child) {
+  padding-bottom: 1.5rem;
+}
+
+.flow-rootPX2 > *:not(:last-child) {
+  padding-bottom: 2rem;
+}
+
+.flow-rootPX3 > *:not(:last-child) {
+  padding-bottom: 3rem;
+}
+
+
+// .card-paddingx {
+//     padding: 1rem;
+// }
+// .card-padding {
+//   padding: 1.5rem;
+// }
+
+// .card-paddingX2{
+//   padding: 2rem;
+// }
+
+// .card-border{
+//     border: 1px solid color(dsilver);
+// }
+
+// .card-rounded{
+//     border-radius: 0.5em;
+//     overflow: hidden;
+// }

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#export DOCKER_DEFAULT_PLATFORM=linux/amd64
+IMAGE_NAME=desmith/inews-lsws-82-amd
+
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker build -t $IMAGE_NAME .

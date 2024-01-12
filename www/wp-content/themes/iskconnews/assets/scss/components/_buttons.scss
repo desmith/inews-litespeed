@@ -1,0 +1,140 @@
+@import '../abstracts/mixin';
+@import '../project/colors';
+@import '../project/typo';
+
+.btns{
+    & > *:not(:last-child){
+        margin-right: 0.5em;
+    }
+}
+
+.btn, .link, .underlined{
+    display: inline-flex;
+    white-space: nowrap;
+    font-size: toRem(18);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.btn{
+    padding: 0.9em 1.3em;
+    border-radius: 0.5em;
+    border: 1px solid transparent;
+    @include fw(m);
+    &.outline{
+      border-color: currentColor;
+      &:hover,
+      &:focus{
+          border-color: transparent;
+      }
+    }
+    &.hvr\:outline{
+        &:hover,
+        &:focus{
+            border-color: currentColor;
+        }
+    }
+}
+
+.underlined{
+    padding-bottom: 0.2em;
+    position: relative;
+    &::before,
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        overflow: hidden;
+        transition: inherit;
+    }
+    &::before{
+        width: 100%;
+        left: 0;
+    }
+    &::after{
+        width: 0;
+        right: 0;
+    }
+    &:hover{
+        &::before{
+            width: 0;
+            left: auto;
+            right: 0;
+        }
+        &::after{
+            width: 100%;
+            left: 0;
+            right: auto;
+            transition-delay: 0.35s;
+        }
+    }
+}
+
+.btn, .link{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    img + span,
+    svg + span{
+        margin-left: 0.6em;
+    }
+
+    span + img,
+    span + svg{
+        margin-left: 0.6em;
+    }
+
+    svg > *{
+        stroke: currentColor !important;
+    }
+}
+
+// .btns--social-logins{
+//     margin-bottom: 10px;
+// }
+
+// .btn--social-signin {
+//     display: flex;
+//     align-items: center;
+//     padding: 0.5em 1em;
+//     min-height: 45px;
+//     border-radius: 12px;
+//     font-family: inherit;
+//     font-style: normal;
+//     @include fw(sb);
+//     font-size: 13px;
+//     letter-spacing: 0.03em;
+//     color: color(white);
+//     margin-bottom: 12px;
+//     position: relative;
+//     &--google {
+//         border: 1px solid #777777;
+//         background-color: color(white);
+//         color: #333232;
+//     }
+//     &--apple {
+//         background: color(black);
+//         border: 1px solid color(black);
+//     }
+//     &--facebook {
+//         background: color(facebook);
+//         border: 1px solid color(facebook);
+//     }
+//     &--mobile{
+//         border: 1px solid #777777;
+//         background-color: color(white);
+//         color: #333232;
+//         &:hover, &:focus{
+//             border-color: 333232;
+//             background-color: #333232;
+//             color: color(white);
+//         }
+//     }
+
+//     span:nth-child(2) {
+//         margin: 0 auto;
+//     }
+// }

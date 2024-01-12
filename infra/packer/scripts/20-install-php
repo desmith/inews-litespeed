@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e -o pipefail      # exit if there are any errors
+export PATH=/usr/local/bin:$PATH
+
+echo "********************* 20-install-php *********************"
+
+dnf install -y lsphp82 lsphp82-common \
+    lsphp82-bcmath \
+    lsphp82-gd \
+    lsphp82-intl \
+    lsphp82-process \
+    lsphp82-mbstring \
+    lsphp82-pecl-memcached \
+    lsphp82-mysqlnd \
+    lsphp82-opcache \
+    lsphp82-pdo \
+    lsphp82-imap \
+    lsphp82-sodium \
+    lsphp82-soap \
+    lsphp82-xml \
+    lsphp82-zip
+

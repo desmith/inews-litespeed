@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+date >> /var/log/perf/cpu_hogs && ps -eo pcpu,pid,user,args | sort -r -k1 | head -5 >> /var/log/perf/cpu_hogs
+date >> /var/log/perf/mem_hogs && ps -eo pmem,pid,user,args | sort -r -k1 | head -5 >> /var/log/perf/mem_hogs
+

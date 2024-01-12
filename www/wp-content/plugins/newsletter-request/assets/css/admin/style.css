@@ -1,0 +1,7 @@
+#quote-page{margin-top: 20px;}
+#quote-page table th{text-align: left;}
+#quote-page .table.table-striped.dp-view-table{border-bottom: 2px solid #1b1b1b;min-width: 600px;padding: 20px 0;}
+
+.dm_cr_settings .inputField input[type="text"],.dm_cr_settings .editorField{width: 50%;}
+
+.alert,#message{display: none;}

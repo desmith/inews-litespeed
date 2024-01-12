@@ -1,0 +1,2 @@
+certbot certonly --non-interactive --agree-tos -m devaprastha@iskcon.org --webroot -w /usr/local/lsws/prod.iskconnews.org/www /etc/letsencrypt/live/prod.iskconnews.org/ -d iskconnews.org -d www.iskconnews.org -d prod.iskconnews.org -d origin.iskconnews.org
+#certbot certonly -v --expand --cert-name prod.iskconnews.org --agree-tos -m devaprastha@iskcon.org --webroot -w /usr/local/lsws/prod.iskconnews.org/www -d iskconnews.org -d www.iskconnews.org -d prod.iskconnews.org -d origin.iskconnews.org

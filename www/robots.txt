@@ -1,0 +1,18 @@
+User-Agent: *
+Allow: /wp-content/uploads/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /readme.html
+Disallow: /refer/
+
+Disallow: /*/comment-page-*
+Disallow: /*?replytocom=*
+Disallow: /*/trackback
+Disallow: /comments/feed
+Disallow: /*/?s=*\
+Disallow: /*?*
+Disallow: /attachment/
+
+Sitemap: https://iskconnews.org/post-sitemap.xml
+Sitemap: https://iskconnews.org/page-sitemap.xml

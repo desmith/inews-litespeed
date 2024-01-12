@@ -1,0 +1,631 @@
+@import '../project/colors';
+@import '../project/typo';
+@import '../abstracts/mixin';
+@import '../abstracts/flex-mixin';
+
+.allForm {
+  --fsize: 16px;
+  --frmPad: 15px;
+  --frmRadius: 4px;
+  --fsizeHasValue: 12px;
+  --frmLabelClr: #000;
+  --frmClr: #000;
+  --frmBorderClr: #bdbdbd;
+
+  @media (max-width: 1700px) {
+    --fsize: 12.8px;
+  }
+
+  &.white {
+    --frmClr: #fff;
+    --frmBorderClr: #fff;
+    --frmChkBorder: #fff;
+    --frmChkBg: transparent;
+
+    option {
+      background: rgb(0 0 0 / 90%);
+      // font-weight: $fw-reg;
+    }
+  }
+}
+
+// form autofill
+.allForm input:-webkit-autofill,
+.allForm input:-webkit-autofill:hover,
+.allForm input:-webkit-autofill:focus,
+.allForm textarea:-webkit-autofill,
+.allForm textarea:-webkit-autofill:hover,
+.allForm textarea:-webkit-autofill:focus,
+.allForm select:-webkit-autofill,
+.allForm select:-webkit-autofill:hover,
+.allForm select:-webkit-autofill:focus {
+  transition: background-color 50000s ease-in-out 0s;
+  -webkit-text-fill-color: var(--frmClr) !important;
+}
+
+// remove safari autofill human icon
+.allForm input::-webkit-contacts-auto-fill-button {
+  position: absolute;
+  right: 0;
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+// input - text, passord, email
+.allForm .form-element {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-bottom: 40px;
+
+  &.mb-0 {
+    margin-bottom: 0;
+  }
+
+  &.fullW {
+    width: 100% !important;
+  }
+
+  &.no-form-field {
+    line-height: 48px;
+
+    & > *:not( :last-child ) {
+      margin-right: 15px;
+    }
+  }
+
+  &.field-error .form-field {
+    --frmBorderClr: #{color(red)};
+  }
+}
+
+.allForm .fInfo {
+  margin-top: 8px;
+}
+
+.allForm .form-element .form-field {
+  font-size: var(--fsize);
+  font-weight: inherit;
+  color: var(--frmClr);
+  text-align: left;
+  width: 100%;
+  min-height: 42px;
+  padding: 12px 15px;
+  resize: none;
+  border: none;
+  border: 1px solid var(--frmBorderClr);
+  border-radius: var(--frmRadius);
+  background: transparent;
+  background-color: transparent;
+  // @include font(r);
+}
+
+//-- input - text, passord, email
+.allForm .form-element.has-child {
+  margin-bottom: 0;
+}
+
+.allForm .form-element .form-label {
+  font-size: var(--fsize);
+  font-weight: inherit;
+  color: var(--frmLabelClr);
+  position: absolute;
+  top: 11px;
+  left: var(--frmPad);
+  width: auto;
+  transition: 0.3s;
+  transition: 0.3s;
+  transition: 0.3s;
+  transition: 0.3s;
+  pointer-events: none;
+
+  b {
+    color: red;
+  }
+}
+
+// textarea
+.allForm .form-element.form-textarea {
+  width: 100%;
+}
+
+.allForm .form-element.form-textarea .form-field {
+  line-height: 22px;
+  height: 65px;
+}
+
+//-- textarea
+.allForm .form-element.has-value .form-field {
+  border-color: color(yellow);
+}
+
+.allForm .form-element.has-value .form-label {
+  font-size: 12px;
+  color: #000;
+  top: -24px;
+}
+
+// captcha
+.allForm .form-element.form-captcha {
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: auto;
+  margin: 0 !important;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-pack: flex-end;
+  -moz-box-pack: flex-end;
+  -ms-flex-pack: flex-end;
+}
+
+.allForm .form-element.form-captcha span:not( :last-child ) {
+  margin-right: 10px;
+}
+
+.allForm .form-element.form-captcha span input[type='text'] {
+  text-align: center;
+  width: 48px;
+  height: 48px;
+  padding: 0 3px;
+  border: 1px solid var(--frmBorderClr);
+  outline: none;
+}
+
+.allForm .form-element.form-captcha span input::-webkit-contacts-auto-fill-button {
+  position: absolute;
+  right: 0;
+  display: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.allForm .form-element.form-captcha span b {
+  color: red;
+  margin-right: 3px;
+}
+
+.allForm .form-element.form-captcha i.msg-error {
+  right: 0;
+  left: auto;
+}
+
+//-- captcha
+
+// SELECT AND DATE
+.allForm .form-element.form-select .form-field,
+.allForm .form-element.form-date .form-field {
+  padding-right: 50px;
+}
+
+// .allForm .form-element.form-select .form-field option{
+//   @include font(r);
+// }
+.allForm .form-element.form-select::after,
+.allForm .form-element.form-date::after {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 42px;
+  height: 42px;
+  content: '';
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.allForm .form-element.form-select::after {
+  position: absolute;
+  top: 17px;
+  right: 20px;
+  width: 8px;
+  height: 8px;
+  content: '';
+  transform: rotate(45deg);
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  border-color: var(--frmClr);
+}
+
+.allForm .form-element.form-date::after {
+  width: 45px;
+  background-image: url('../img/icons/calendar.svg');
+  background-size: 23px;
+}
+
+// SELECT AND DATE
+
+// @-moz-document url-prefix() {
+//   .allForm .form-element.form-select .form-field {
+//     padding-top: 30.2px;
+//   }
+// }
+// @media screen and (-webkit-min-device-pixel-ratio:0) {
+// 	.allForm .form-element.form-select select.form-field{
+// 		padding-top: 14px;
+// 	}
+// }
+
+// INLINE SELECT
+.allForm .form-inline-select {
+  position: relative;
+  display: inline-block;
+}
+
+.allForm .form-inline-select::after {
+  @include transform(rotate(45deg));
+  position: absolute;
+  right: 15px;
+  bottom: 20px;
+  width: 10px;
+  height: 10px;
+  content: '';
+  border-width: 0 3px 3px 0;
+  border-style: solid;
+  border-color: var(--frmBorderClr);
+}
+
+.allForm .form-inline-select select {
+  font-size: var(--fsize);
+  color: var(--frmClr);
+  width: 130px;
+  padding: 10px 30px 10px 15px;
+  resize: none;
+  border: 3px solid var(--frmBorderClr);
+  background: transparent;
+  background-color: #fff;
+  // @include font(r);
+}
+
+.allForm .form-inline-select select option {
+  // @include font(r);
+}
+
+// INLINE SELECT
+
+// .allForm .form-info {
+//   width: auto;
+//   font-size: 12px;
+//   margin-top: 0.5em;
+//   opacity: 0.8;
+//   color: #225f79;
+//   .link {
+//     margin: 0;
+//   }
+// }
+.allForm.form-inline {
+  & > * {
+    float: left;
+    margin-bottom: 0;
+
+    &:not( :first-child ) {
+      margin-left: 15px;
+    }
+
+    .form-field {
+      width: 280px;
+    }
+  }
+}
+
+// INPUT = FILE
+.form-elementfile {
+  input[type='file'] {
+    font-size: 0;
+    float: left;
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    border: 0;
+  }
+
+  label {
+    @media (max-width: 1700px) {
+      background-size: 28px;
+    }
+    font-size: 15px;
+    font-size: var(--fsize);
+    line-height: 54px;
+    color: var(--frmClr);
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    height: 54px;
+    margin: 0;
+    padding-left: 55px;
+    border: 1px solid var(--frmBorderClr);
+    border-radius: var(--frmRadius);
+    background: url(../img/icons/upload.svg) no-repeat left 15px center;
+    background-color: #fff;
+    background-size: 35px;
+
+    b {
+      color: red;
+    }
+  }
+
+  p.fInfo {
+    font-size: 12px;
+    line-height: 18px;
+    float: left;
+    width: 100%;
+    margin: 4px 0 0 18px;
+
+    b {
+      color: red;
+    }
+  }
+
+  p.filename_prev {
+    font-size: 14px !important;
+    line-height: 54px !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+// INPUT = FILE
+
+// DEBIT CARD GROUP
+.allCardIcon {
+  position: absolute;
+  top: 17px;
+  right: 12px;
+
+  .icon {
+    $allCardIcon: amex, diners, discover, jcb, maestro, mastercard, visa;
+
+    @each $icons in $allCardIcon {
+      &.icon-#{$icons} {
+        background-image: url('./../img/allCardIcon/#{$icons}.svg');
+      }
+    }
+    width: 50px;
+    height: 31px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .icon:not( .active ) {
+    display: none;
+  }
+}
+
+// DEBIT CARD GROUP
+
+// CHECK BOX
+.allForm {
+  .form-rdiochk {
+    float: left;
+    width: 100%;
+  }
+
+  .rdiochklabel {
+    @media (max-width: 1730px) {
+      font-size: torem(12.8);
+    }
+    font-size: torem(16);
+    position: relative;
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: torem(25);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+    }
+
+    &::before {
+      @media (max-width: 1730px) {
+        top: 1px;
+      }
+      top: 6px;
+      left: 0;
+      width: torem(16);
+      height: torem(16);
+      border: 1px solid color(border);
+    }
+
+    &::after {
+      @media (max-width: 1730px) {
+        top: 5px;
+      }
+      top: 10px;
+      left: 4px;
+      width: 8px;
+      height: 8px;
+      transition: 0.4s;
+      // background: color(pinkDark);
+      transform: scale(0);
+    }
+  }
+
+  .inputHelper {
+    display: none;
+
+    &:checked ~ label::after,
+    [checked='checked'] ~ label::after {
+      transition: 0.2s;
+      transform: scale(1);
+    }
+  }
+}
+
+// CHECK BOX
+
+// RADIO BUTTON
+.radiowrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px 0 0;
+
+  .container {
+    font-size: var(--fsize);
+    color: var(--frmLabelClr);
+    position: relative;
+    display: block;
+    margin: 0 15px;
+    padding-left: 25px;
+    cursor: pointer;
+    user-select: none;
+    user-select: none;
+    user-select: none;
+
+    input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      cursor: pointer;
+
+      &:checked ~ .checkmark {
+        background-color: color(black);
+
+        &::after {
+          display: block;
+        }
+      }
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #eee;
+
+      &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: none;
+        width: 6px;
+        height: 6px;
+        content: '';
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: white;
+      }
+    }
+
+    &:hover {
+      input ~ .checkmark {
+        background-color: #ccc;
+      }
+    }
+  }
+}
+
+// RADIO BUTTON
+
+// FOR INLINE FORM ELEMENT
+.allForm .form-flexsb {
+  // @include flex();
+  // @include flex-direction(row);
+  // @include justify-content(flex-start);
+  // @include align-items(center);
+  @include d-flex(r, fs, c);
+  float: left;
+  width: 100%;
+}
+
+.allForm .form-flexsb > * {
+  // margin-left: 15px;
+}
+
+@media (max-width: 550px) {
+  .allForm .form-flexsb {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .allForm .form-flexsb > * {
+    margin-top: 25px;
+    margin-left: 0;
+  }
+
+  .allForm .form-flexsb .btn {
+    width: 100%;
+  }
+}
+
+// FOR INLINE FORM ELEMENT
+
+// ALL ERRO AND SUCCESS
+i.msg-error,
+label.error,
+i.error {
+  // color: color(lred);
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: normal;
+  color: #e10303;
+  position: absolute;
+  top: 103%;
+  left: 0;
+
+  &.msg-error-full {
+    white-space: nowrap;
+  }
+}
+
+.fl-success,
+.fl-error {
+  float: left;
+  width: 100%;
+}
+
+.fl-error {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ad4141;
+  position: relative;
+  margin: 15px 0;
+  padding: 10px 10px 10px 41px !important;
+  border: 1px solid #da2020;
+  border-radius: 4px;
+  background-color: #f5e3e3;
+  // float: left;
+  // width: 100%;
+}
+
+.fl-success,
+.comment-success {
+  font-size: 15px;
+  font-weight: 600;
+  color: #41ad49;
+  position: relative;
+  margin: 15px 0;
+  padding: 10px 10px 10px 41px !important;
+  border: 1px solid #41ad49;
+  // @include border-radius(4px);
+  border-radius: 4px;
+  background-color: #e5ffd5;
+}
+
+.fl-success::before,
+.comment-success::before {
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 30px;
+  height: 32px;
+  content: '';
+  // background: url(../img/tick.svg) no-repeat;
+  background-size: 30px auto;
+}

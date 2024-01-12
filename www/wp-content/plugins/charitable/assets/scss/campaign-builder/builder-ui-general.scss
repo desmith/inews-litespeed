@@ -1,0 +1,50 @@
+// Form Builder styles.
+//
+// Toolbar.
+//
+// @since 1.8.0
+
+@import 'partials/common';
+
+@import 'partials/toolbar';
+@import 'partials/panels-toggle';
+@import 'partials/panels';
+
+@import 'partials/panel-field';
+@import 'partials/panel-sidebar-section';
+@import 'partials/panel-content-section';
+
+@import 'partials/template_ui';
+@import 'partials/modals';
+
+.charitable-edit-campaign-title-area {
+    input.charitable-form-name {
+        border: 0;
+        font-size: 18px;
+        font-weight: 400;
+        padding: 5px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    input.charitable-form-name[disabled] {
+        pointer-events:none;
+    }
+    input.charitable-form-name:hover {
+        text-decoration: none;
+    }
+    &.edit {
+        input.charitable-form-name {
+            border: none;
+            box-shadow: none;
+            margin-right: 20px;
+        }
+        input.charitable-form-name:focus {
+            border: none;
+        }
+    }
+}
+
+#charitable-panel-field-settings-campaign_description-wrap,
+#charitable-panel-field-settings-campaign_extended_description-wrap {
+	display: none;
+}

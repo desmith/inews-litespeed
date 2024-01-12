@@ -1,0 +1,11 @@
+body.login {
+  background-color: #2f62a3;
+
+  h1 a {
+    background-image: url('../img/logo.png');
+  }
+}
+
+form#loginform, #login-message, #wfls-prompt-overlay {
+  background-color: #a5b9d2;
+}

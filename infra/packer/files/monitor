@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# This script is used to monitor the server load and restart the server if the load is high.
+
+LOGFILE="/var/log/perf/load_kill_log"
+
+# Obtain the server load
+load_history=$(cat /proc/loadavg | awk -F" " '{print $1 " "  $2 " " $3}')
+
+load_float=$(echo $load_history|awk -F " " '{print $1}')
+load_base=$(echo $load_history|awk -F \. '{print $1}')
+
+{
+    date
+    echo "\$load_history: $load_history"
+    echo "\$load_float: $load_float"
+    echo "\$load_base: $load_base"
+    echo ""
+} >>$LOGFILE
+
+if [ "$load_base" -ge "10" ]; then
+    {
+        echo "**************************************************"
+        date
+        ps auxfww
+        echo "**************************************************"
+        echo ""
+    } >>$LOGFILE
+
+    sns_msg="Server restarted via '/root/bin/monitor' due to high load: $load_float ($load_history)"
+    sns_topic_arn="arn:aws:sns:us-east-1:793753096261:ec2-auto-restart-topic"
+    aws sns publish --message "$sns_msg" --topic-arn $sns_topic_arn
+    reboot
+fi

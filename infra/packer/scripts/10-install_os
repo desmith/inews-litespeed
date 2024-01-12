@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -e -o pipefail      # exit if there are any errors
+export PATH=/usr/local/bin:$PATH
+
+echo "********************* 10-install_os *********************"
+dnf update -y
+dnf config-manager --set-enabled crb
+dnf install -y epel-release
+dnf --enablerepo=crb install -y libmemcached-awesome
+dnf --enablerepo=crb install -y libmemcached-awesome-tools
+
+dnf install -y \
+    awscli \
+    bc \
+    certbot \
+    fish \
+    git \
+    htop \
+    httpd-tools \
+    neovim \
+    nfs-utils \
+    mlocate \
+    python3-pip \
+    stress \
+    wget \
+    zip
+
+updatedb
+
+mkdir -p /root/bin /var/log/perf
+mv /tmp/perflog /tmp/monitor /root/bin
+chmod 0711 /root/bin/perflog /root/bin/monitor  # rwx--x--x
+
+mv /tmp/crontab.src /root
+chmod 0600 /root/crontab.src  # rw-------
+
+wget -O - https://repo.litespeed.sh | sudo bash
+dnf install -y openlitespeed

@@ -1,0 +1,34 @@
+node_modules/
+ai1wm-backups/
+files
+media
+
+### WordPress ###
+# Core
+wp-content/advanced-cache.php
+wp-content/db.php
+wp-content/debug.log
+
+wp-content/backups-dup-lite
+wp-content/cache
+wp-content/logs
+wp-content/languages/
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/wflogs/
+
+# Configuration
+wp-config.php
+
+# Example themes
+wp-content/themes/*/
+!wp-content/themes/iskconnews
+
+# Example plugin
+wp-content/plugins/hello.php
+
+# Local overrides
+wp-content/plugins/search-customizations.php
+
+# Log files
+*.log

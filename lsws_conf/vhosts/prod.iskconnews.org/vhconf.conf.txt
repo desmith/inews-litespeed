@@ -1,0 +1,48 @@
+enableipgeo 1
+enablebr 1
+enablegzip 1
+docroot $SERVER_ROOT/prod.iskconnews.org/www
+vhdomain iskconnews.org
+vhaliases prod.iskconnews.org, www.iskconnews.org
+
+errorlog $VH_ROOT/logs/error.log {
+    useserver 0
+    loglevel ERROR
+    keepdays 7
+    compressarchive 1
+}
+
+index  {
+    useserver 0
+    indexfiles index.php, index.html
+    autoindex 0
+}
+
+scripthandler  {
+    add lsapi:lsphp php
+}
+
+rewrite  {
+    enable 1
+    autoloadhtaccess 1
+    unknownkeywords rewriteengine On
+    unknownkeywords rewritebase /
+    unknownkeywords rewriterule ^/index\.php$ - [L]
+    unknownkeywords rewritecond %{REQUEST_FILENAME} !-f
+    unknownkeywords rewritecond %{REQUEST_FILENAME} !-d
+    unknownkeywords rewriterule . /index.php [L]
+    rules <<<MY_END
+rewriteengine On
+rewritebase /
+rewriterule ^/index\.php$ - [L]
+rewritecond %{REQUEST_FILENAME} !-f
+rewritecond %{REQUEST_FILENAME} !-d
+rewriterule . /index.php [L]
+    MY_END
+}
+
+accesslog access.log {
+    compressarchive 1
+    useserver 0
+    keepdays 7
+}

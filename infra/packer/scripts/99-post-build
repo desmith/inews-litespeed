@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+echo "********************* 99-post-build *********************"
+
+SSM_KEY='/inews/infra/litespeed/ami_id'
+OLD_AMI_ID=$(aws ssm get-parameter --name "${SSM_KEY}" --query "Parameter.Value" --output text)
+
+echo "Deleting old tags from AMI ${OLD_AMI_ID}..."
+aws ec2 delete-tags --resources "${OLD_AMI_ID}" --tags Key=ec2-cleanup Key=version
+
+echo "Creating new AMI ID from ami.txt ..."
+NEW_AMI_ID=$(cat ami.txt)
+
+echo "Updating SSM parameter ${SSM_KEY} with new AMI ID ${NEW_AMI_ID} ..."
+aws ssm put-parameter \
+        --name "${SSM_KEY}" \
+        --value "${NEW_AMI_ID}" \
+        --type String \
+        --overwrite
+
+echo "Tagging new AMI ${NEW_AMI_ID} ..."
+aws ec2 create-tags --resources "${NEW_AMI_ID}" --tags Key=ec2-cleanup,Value=False Key=version,Value=Latest
