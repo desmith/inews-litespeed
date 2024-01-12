@@ -5,6 +5,8 @@
 
 TODO:
 
+1) Setup local environment
+2) Setup dev server
 3) Watchdog (watchdog) ?
 4) Munin (munin-node) ?
 5) Monit (monit) ?
