@@ -2,7 +2,8 @@
 
 echo "********************* 99-post-build *********************"
 
-SSM_KEY='/inews/infra/litespeed/ami_id'
+env=$1
+SSM_KEY="inews/infra/$env/litespeed/ami_id"
 OLD_AMI_ID=$(aws ssm get-parameter --name "${SSM_KEY}" --query "Parameter.Value" --output text)
 
 echo "Deleting old tags from AMI ${OLD_AMI_ID}..."

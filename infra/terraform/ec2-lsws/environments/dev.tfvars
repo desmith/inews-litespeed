@@ -1,10 +1,11 @@
-subdomain          = "dev"
-main_domain        = "iskconnews.org"
+app_name = "inews"
+component = "litespeed"
 keypair_name       = "IC-News"
 instance_type      = "t3.small"
-security_group_ids = [
-    "sg-02fb8ee3c8ace0441",
-    "sg-01432a22139cc83e7",
-    "sg-006a133876cdd75fe",
-    "sg-0a54b9ae6b2d07a00"
+ssm_param_ami_id   = "/inews/infra/dev/litespeed/ami_id"
+elb_listener_priority = 15
+target_group_host_headers = [
+    "dev.iskconnews.org",
+    "infra-dev.iskconnews.org",
+    "pma-infra.iskconnews.org"
 ]

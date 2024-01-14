@@ -1,0 +1,5 @@
+Host inews-infra-${env}${count} inews-${env}${count}
+    HostName ${private_ip4_address}
+    User ec2-user
+    Identityfile ~/.ssh/icg/${private_key_file}
+    ProxyJump bastion-ic

@@ -2,7 +2,7 @@ AMI_NAME := "inews-infra-litespeed"
 AWS_DEFAULT_REGION ?= us-east-1
 APP_NAME ?= inews
 COMPONENT ?= litespeed
-ENV ?= prod
+ENV ?= dev
 
 PACKER_TEMPLATE ?= packer.json.pkr.hcl
 
@@ -11,10 +11,10 @@ VPC_ID := $(shell aws ec2 describe-vpcs --filters Name=tag:network,Values=primar
 #SECURITY_GROUP_ID := $(shell aws ec2 describe-security-groups --filters Name=tag:sx_name,Values=all-sg Name=vpc-id,Values=$(VPC_ID) --query 'SecurityGroups[].GroupId' --output text)
 SUBNET_ID := subnet-5b4d9954
 
-
 #SOURCE_AMI_PARAM ?= /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
 #export AMI_ID ?= $(shell aws ssm get-parameter --name "$(SOURCE_AMI_PARAM)" --query "Parameter.Value" --output text)
-AMI_ID := "ami-0efb76882af9859da"
+
+AMI_ID := "ami-0efb76882af9859da"  # (CentOS 9 Stream)
 
 export PACKER_LOG := 1
 export PACKER_LOG_PATH := packerlog.txt

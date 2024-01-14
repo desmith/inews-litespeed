@@ -154,6 +154,11 @@ build {
 
     provisioner "shell" {
         execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        script          = "./scripts/15-install-ssh-keys"
+    }
+
+    provisioner "shell" {
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
         script          = "./scripts/20-install-php"
     }
 
@@ -163,7 +168,7 @@ build {
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/30-install-fstab"
     }
 

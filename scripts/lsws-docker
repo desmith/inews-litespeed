@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+docker build --platform linux/arm64  -t desmith/inews-lsws-82 -f Docker/lsws/Dockerfile
+
+#docker run --name lsws-82 -p 7080:7080 -p 80:80 -p 443:443 -it desmith/lsws-82
+
+#docker run --name lsws-82 -p 7080:7080 -p 80:80 -p 443:443 -it ghcr.io/ndigitals/openlitespeed:latest
+#docker exec -it lsws-82 bash
+
+# run container
+#docker run -d -p 8081:80 srv.world/centos-httpd
