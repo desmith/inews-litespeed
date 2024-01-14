@@ -3,16 +3,22 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
+env=$1
 echo "********************* 30-configure-lsws *********************"
+echo "\$env: $env"
 
 rm -rf /usr/local/lsws/conf
 ln -s /mnt/efs/lsws/conf /usr/local/lsws/conf
 mv /usr/local/lsws/lsphp74/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp74
 mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp82
 
-ln -s /var/www/iskconnews.org /usr/local/lsws/prod.iskconnews.org
-ln -s /var/www/iskconnews.org /usr/local/lsws/origin.iskconnews.org
 ln -s /var/www/phpMyAdmin /usr/local/lsws/pma.iskconnews.org
+
+if [ "$env" == "prod" ]; then
+ln -s /var/www/iskconnews.org /usr/local/lsws/prod.iskconnews.org
+else
+ln -s /var/www/dev.iskconnews.org /usr/local/lsws/dev.iskconnews.org
+fi
 
 systemctl enable lsws
 systemctl daemon-reload

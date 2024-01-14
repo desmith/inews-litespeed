@@ -7,7 +7,10 @@ variable "keypair_name" { type = string }
 variable "vpc_id" { type = string }
 variable "subnet_id" { type = string }
 variable "target_group_host_headers" { type = list(string) }
+variable "target_group_host_headers_admin" { type = list(string) }
 variable "ssh_conf_dir" { type = string }
+variable "alb_certificate_arn" { type = string }
+variable "alb_arn" { type = string }
 
 variable "domain" {
   type    = string

@@ -169,7 +169,7 @@ build {
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/30-configure-lsws"
     }
 
