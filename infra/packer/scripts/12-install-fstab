@@ -10,12 +10,7 @@ echo "Environment: $env"
 mkdir -p /mnt/efs
 rm -rf /var/www
 
-cat <<EOF >> /etc/fstab
-# inews efs
-fs-ccb95e4d.efs.us-east-1.amazonaws.com:/ /mnt/efs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 2
-EOF
-
-# Making Mount Permanent
+# Making mount permanent
 if [ "$env" == "prod" ]; then
     cat <<EOF >> /etc/fstab
 # inews efs
@@ -28,7 +23,7 @@ cat <<EOF >> /etc/fstab
 # inews efs prod gets mounted read-only
 fs-ccb95e4d.efs.us-east-1.amazonaws.com:/ /mnt/efs-ro nfs4 ro,nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 2
 # inews efs dev gets mounted rw
-fs-02f0655c0cfdae6dd.efs.us-east-1.amazonaws.com:/ /mnt/efs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 2
+fs-0d120006a48ceff48.efs.us-east-1.amazonaws.com:/ /mnt/efs nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 0 2
 EOF
 fi
 

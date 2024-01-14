@@ -119,8 +119,9 @@ source "amazon-ebs" "packer-ebs" {
 
     tags = {
         CreationDate = "{{isotime \"20060102 15:04:05 MST\"}}"
-        Name         = "${var.app_name}-${var.component}"
+        Name         = "${var.app_name}-${var.component}-${var.env}"
         app          = var.app_name
+        component    = var.component
         env          = var.env
         ec2-cleanup  = "False"
         created_by   = "packer"
@@ -203,11 +204,9 @@ build {
         script          = "./scripts/80-install-optional"
     }
 
-
     #    provisioner "shell" {
     #        script = "./scripts/config-ecr-credentials-helper.sh"
     #    }
-
 
     #    provisioner "ansible" {
     #        command        = "${var.ansible_bin_path}/ansible-playbook"
@@ -231,6 +230,7 @@ build {
     }
 
     post-processor "shell-local" {
+        execute_command = ["bash", "-c", "{{.Vars}} {{.Script}} ${var.env}"]
         script = "./scripts/99-post-build"
     }
 }
