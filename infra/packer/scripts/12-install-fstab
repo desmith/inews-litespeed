@@ -4,7 +4,7 @@ set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
 env=$1
-echo "********************* 30-install-fstab *********************"
+echo "********************* 12-install-fstab *********************"
 echo "Environment: $env"
 
 mkdir -p /mnt/efs

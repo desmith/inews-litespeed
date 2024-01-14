@@ -3,8 +3,7 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
-echo "********************* 25-configure-lsws *********************"
-
+echo "********************* 30-configure-lsws *********************"
 
 rm -rf /usr/local/lsws/conf
 ln -s /mnt/efs/lsws/conf /usr/local/lsws/conf

@@ -153,6 +153,11 @@ build {
     }
 
     provisioner "shell" {
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
+        script          = "./scripts/12-install-fstab"
+    }
+
+    provisioner "shell" {
         execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
         script          = "./scripts/15-install-ssh-keys"
     }
@@ -164,12 +169,7 @@ build {
 
     provisioner "shell" {
         execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
-        script          = "./scripts/25-configure-lsws"
-    }
-
-    provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
-        script          = "./scripts/30-install-fstab"
+        script          = "./scripts/30-configure-lsws"
     }
 
     provisioner "file" {

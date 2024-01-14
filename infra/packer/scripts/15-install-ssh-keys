@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -e -o pipefail      # exit if there are any errors
+export PATH=/usr/local/bin:$PATH
+
+echo "********************* 15-install-ssh-keys *********************"
+
 # This is being done so we can log into the instance to debug issues.
 cat <<EOF >> ~/.ssh/authorized_keys
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnqf57GJBOdr7qVex4VrXzPxL4ysaphCeqrDh9ClYwmBvZ4c7ppyD3iqpL4a76wN1HFU9rZjQyGzf6X0vObRSIEThBsUUfmv/XPvLUS7s+9h89ITE854KNm5uWNR5UAeo0WFmGW+YjxraEUEfg3RJ8MSRwaxq6RRPjusjbQmTcZaO3UH8SShkNUgj9GcLahc6Pbuc3atX8nT34aLuOO3yPN3Z68WUsZXPP3d5Pw3Coy0q+TFtorFMwKCMW9tZQFIDtI2yYVg1ukMMXB0aIPIqRZfAKPozRh9RO/GpHv0e2c9itV6wZHZde0Ni3FDKCVJ+tGxWvNzVksn4486TQpeVl devaprastha@Devap.local

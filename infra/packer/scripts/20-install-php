@@ -20,4 +20,3 @@ dnf install -y lsphp82 lsphp82-common \
     lsphp82-soap \
     lsphp82-xml \
     lsphp82-zip
-
