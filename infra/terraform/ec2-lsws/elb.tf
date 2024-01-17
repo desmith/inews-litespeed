@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "inews" {
   vpc_id   = var.vpc_id
 }
 resource "aws_lb_target_group" "admin" {
-  name     = local.target_group_name
+  name     = "${local.target_group_name}-admin"
   port     = 7080
   protocol = "HTTPS"
   vpc_id   = var.vpc_id
@@ -64,7 +64,7 @@ resource "aws_alb_listener" "admin" {
 
 resource "aws_lb_listener_rule" "listener_rule_admin" {
   listener_arn = var.https_listener_arn
-  priority     = var.elb_listener_priority
+  priority     = var.elb_listener_priority_admin
 
   action {
     type             = "forward"

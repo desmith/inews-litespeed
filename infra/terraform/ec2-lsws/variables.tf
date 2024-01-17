@@ -74,5 +74,10 @@ variable "https_listener_arn" {
 
 variable "elb_listener_priority" {
   type    = number
-  default = 101
+  default = 198
+}
+
+variable "elb_listener_priority_admin" {
+  type    = number
+  default = 199
 }

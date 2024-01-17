@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>AWSBackup Status Report</title>
+
+        <style>
+            {% include 'styles.css' ignore missing %}
+        </style>
+    </head>
+    <body>
+
+        <h2>Backup Status Report</h2>
+
+        <table class="tablereport">
+          <thead>
+            <tr class="jobs">
+              <th class="name">Vault Name</th>
+              <th class="date">Completion Date</th>
+              <th class="type">Resource Type</th>
+              <th class="state">State</th>
+              <th class="message">Status Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for job in jobs %}
+            <tr class="jobs {% if job.state == 'FAILED' %}failed{% endif %}">
+              <td class="name">{{ job.vault_name }}</td>
+              <td class="date">{{ job.completion_date }}</td>
+              <td class="type">{{ job.resource_type }}</td>
+              <td class="state">{{ job.state }}</td>
+              <td class="message">{% if job.state == 'COMPLETED' %}N/A{% else %}{{ job.status_message }}{% endif %}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+
+
+        <footer>
+
+            <p>Jenkins: <a
+                href="https://jenkins-ops.prod.soundexchange.com/job/CloudOps/job/report-awsbackup-status/">
+                jenkins-ops://Cloudops/report-awsbackup-status (Lambda Function)
+                </a>
+            </p>
+
+            <p>Codebase: <a
+                href="https://github.com/soundexchange-cloudops/report-awsbackup-status">
+                report-rds-snapshot-storage
+                </a>
+            </p>
+
+        </footer>
+
+    </body>
+</html>

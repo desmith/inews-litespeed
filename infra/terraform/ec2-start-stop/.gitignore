@@ -1,0 +1,14 @@
+/html/
+**/.terraform/
+**/terraform.tfstate*
+.terraform.tfstate*
+
+tfplan
+tfplan.txt
+
+*.iml
+.venv/
+
+*.zip
+
+/layer/

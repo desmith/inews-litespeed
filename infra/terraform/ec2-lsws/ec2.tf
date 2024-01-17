@@ -4,6 +4,7 @@ locals {
     component = var.component
     env = var.env
   }
+  auto_start_stop = var.env == "dev" ? True : False
 }
 
 resource "aws_instance" "inews" {
@@ -31,6 +32,7 @@ resource "aws_instance" "inews" {
     local.common_tags,
     {
       Name = local.instance_name
+      auto_start_stop = local.auto_start_stop
     }
   )
   volume_tags = merge(

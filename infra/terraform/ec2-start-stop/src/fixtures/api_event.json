@@ -1,0 +1,151 @@
+{
+  "resource": "/",
+  "path": "/",
+  "httpMethod": "GET",
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-US,en;q=0.5",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-ASN": "14593",
+    "CloudFront-Viewer-Country": "US",
+    "dnt": "1",
+    "Host": "5biovuccwf.execute-api.us-east-1.amazonaws.com",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "none",
+    "sec-fetch-user": "?1",
+    "sec-gpc": "1",
+    "upgrade-insecure-requests": "1",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Via": "2.0 6d9eecfe2218e432c2d0867238a1744e.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "qm6NKqn7AyRH3uz23AIY7uhH56H0Odw3nUX26G3Nzvc9SEfABh05Eg==",
+    "X-Amzn-Trace-Id": "Root=1-65a6e90e-32da39e4584a5aea75d50a92",
+    "X-Forwarded-For": "98.97.177.226, 15.158.27.202",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept": [
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
+    ],
+    "Accept-Encoding": [
+      "gzip, deflate, br"
+    ],
+    "Accept-Language": [
+      "en-US,en;q=0.5"
+    ],
+    "CloudFront-Forwarded-Proto": [
+      "https"
+    ],
+    "CloudFront-Is-Desktop-Viewer": [
+      "true"
+    ],
+    "CloudFront-Is-Mobile-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-SmartTV-Viewer": [
+      "false"
+    ],
+    "CloudFront-Is-Tablet-Viewer": [
+      "false"
+    ],
+    "CloudFront-Viewer-ASN": [
+      "14593"
+    ],
+    "CloudFront-Viewer-Country": [
+      "US"
+    ],
+    "dnt": [
+      "1"
+    ],
+    "Host": [
+      "5biovuccwf.execute-api.us-east-1.amazonaws.com"
+    ],
+    "sec-fetch-dest": [
+      "document"
+    ],
+    "sec-fetch-mode": [
+      "navigate"
+    ],
+    "sec-fetch-site": [
+      "none"
+    ],
+    "sec-fetch-user": [
+      "?1"
+    ],
+    "sec-gpc": [
+      "1"
+    ],
+    "upgrade-insecure-requests": [
+      "1"
+    ],
+    "User-Agent": [
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0"
+    ],
+    "Via": [
+      "2.0 6d9eecfe2218e432c2d0867238a1744e.cloudfront.net (CloudFront)"
+    ],
+    "X-Amz-Cf-Id": [
+      "qm6NKqn7AyRH3uz23AIY7uhH56H0Odw3nUX26G3Nzvc9SEfABh05Eg=="
+    ],
+    "X-Amzn-Trace-Id": [
+      "Root=1-65a6e90e-32da39e4584a5aea75d50a92"
+    ],
+    "X-Forwarded-For": [
+      "98.97.177.226, 15.158.27.202"
+    ],
+    "X-Forwarded-Port": [
+      "443"
+    ],
+    "X-Forwarded-Proto": [
+      "https"
+    ]
+  },
+  "queryStringParameters": {
+    "action": "start"
+  },
+  "multiValueQueryStringParameters": {
+    "action": [
+      "start"
+    ]
+  },
+  "pathParameters": None,
+  "stageVariables": None,
+  "requestContext": {
+    "resourceId": "t1b8cy5oqg",
+    "resourcePath": "/",
+    "httpMethod": "GET",
+    "extendedRequestId": "RplaVEcCIAMEXxQ=",
+    "requestTime": "16/Jan/2024:20:37:34 +0000",
+    "path": "/prod",
+    "accountId": "793753096261",
+    "protocol": "HTTP/1.1",
+    "stage": "prod",
+    "domainPrefix": "5biovuccwf",
+    "requestTimeEpoch": 1705437454615,
+    "requestId": "b0adc9a4-6912-4ccb-84ab-49b417b5f732",
+    "identity": {
+      "cognitoIdentityPoolId": None,
+      "accountId": None,
+      "cognitoIdentityId": None,
+      "caller": None,
+      "sourceIp": "98.97.177.226",
+      "principalOrgId": None,
+      "accessKey": None,
+      "cognitoAuthenticationType": None,
+      "cognitoAuthenticationProvider": None,
+      "userArn": None,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0",
+      "user": None
+    },
+    "domainName": "5biovuccwf.execute-api.us-east-1.amazonaws.com",
+    "apiId": "5biovuccwf"
+  },
+  "body": None,
+  "isBase64Encoded": False
+}

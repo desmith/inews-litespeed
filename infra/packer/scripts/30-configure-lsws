@@ -10,7 +10,7 @@ echo "\$env: $env"
 rm -rf /usr/local/lsws/conf
 ln -s /mnt/efs/lsws/conf /usr/local/lsws/conf
 mv /usr/local/lsws/lsphp74/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp74
-mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp82
+mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp82/bin/lsphp82
 
 ln -s /var/www/phpMyAdmin /usr/local/lsws/pma.iskconnews.org
 

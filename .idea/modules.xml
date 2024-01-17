@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/inews-lightspeed.iml" filepath="$PROJECT_DIR$/.idea/inews-lightspeed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/inews-litespeed.iml" filepath="$PROJECT_DIR$/.idea/inews-litespeed.iml" />
     </modules>
   </component>
 </project>
