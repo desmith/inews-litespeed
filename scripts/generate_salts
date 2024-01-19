@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+function wp_generate_salt() {
+  # Args
+  local length="$(test $1 && echo $1 || echo 12)"
+  local special_chars="$(test $2 && echo $2 || echo 1)"
+  local extra_special_chars="$(test $3 && echo $3 || echo 0)"
+
+  chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  [[ $special_chars != 0 ]] && chars="$chars"'!@#$%^&*()'
+  [[ $extra_special_chars != 0 ]] && chars="$chars"'-_ []{}<>~`+=,.;:/?|'
+
+  salt=''
+  for i in $(seq 1 $length); do
+    salt="${salt}${chars:$((RANDOM % ${#chars})):1}"
+  done
+
+  echo "$salt"
+}
+
+{
+  echo "AUTH_KEY='$(wp_generate_salt 64 1 1)'"
+  echo "SECURE_AUTH_KEY='$(wp_generate_salt 64 1 1)'"
+  echo "LOGGED_IN_KEY='$(wp_generate_salt 64 1 1)'"
+  echo "NONCE_KEY='$(wp_generate_salt 64 1 1)'"
+  echo "AUTH_SALT='$(wp_generate_salt 64 1 1)'"
+  echo "SECURE_AUTH_SALT='$(wp_generate_salt 64 1 1)'"
+  echo "LOGGED_IN_SALT='$(wp_generate_salt 64 1 1)'"
+  echo "NONCE_SALT='$(wp_generate_salt 64 1 1)'"
+} >>.env

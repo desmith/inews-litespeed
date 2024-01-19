@@ -3,9 +3,13 @@
 
 - ami-0efb76882af9859da (CentOS 9 Stream)
 
+### Note: When setting setting
 TODO:
 
 1) Setup local environment
+
+Run the following command to set up your `wp-config.php`: `./scripts/generate_salts`
+
 2) Setup dev server
 3) Watchdog (watchdog) ?
 4) Munin (munin-node) ?

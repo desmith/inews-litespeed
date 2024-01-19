@@ -29,7 +29,7 @@ variable "ami_name" {
 }
 
 variable "app_name" {
-    type    = string
+    type = string
 }
 
 variable "component" {
@@ -201,7 +201,7 @@ build {
     }
 
     provisioner "shell" {
-        script          = "./scripts/80-install-optional"
+        script = "./scripts/80-install-optional"
     }
 
     #    provisioner "shell" {
@@ -231,6 +231,6 @@ build {
 
     post-processor "shell-local" {
         execute_command = ["bash", "-c", "{{.Vars}} {{.Script}} ${var.env}"]
-        script = "./scripts/99-post-build"
+        script          = "./scripts/99-post-build"
     }
 }

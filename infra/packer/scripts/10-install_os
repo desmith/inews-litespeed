@@ -18,6 +18,7 @@ dnf install -y \
     git \
     htop \
     httpd-tools \
+    jq \
     neovim \
     nfs-utils \
     mlocate \

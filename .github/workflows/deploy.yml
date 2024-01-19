@@ -1,0 +1,138 @@
+---
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+env:
+  branch: ${{ github.ref_name }}
+  dest: '/var/www/dev.iskconnews.org/'
+  site: 'https://dev.iskconnews.org'
+  host: 'ec2-user@efs.iskconnews.org'
+
+  AWS_DEFAULT_REGION: 'us-east-1'
+#  AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
+#  AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
+
+  AWS_ACCESS_KEY_ID: $(aws ssm get-parameter
+    --with-decryption
+    --name /infra/DMZ_ACCESS_KEY_ID
+    --query "Parameter.Value"
+    --output text)
+
+  AWS_SECRET_ACCESS_KEY: $(aws ssm get-parameter
+    --with-decryption
+    --name /infra/DMZ_SECRET_ACCESS_KEY
+    --query "Parameter.Value"
+    --output text)
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Github action IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+
+      - name: Add Github Actions IP to LiteSpeed Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LITESPEED_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.branch }}
+
+      - name: Create .env file
+        run: |
+          echo "Deploying to ${{env.branch}}"
+          echo "env.host: ${{ env.host }}"
+
+          echo "${{secrets.DEPLOY_KEY_BASTION}}" > ./deploy_key
+          chmod 600 ./deploy_key
+
+          echo "# Local environment vars" > .env
+          ./scripts/generate_salts
+
+      - name: Deploy to Dev
+        if: env.branch == 'dev'
+#        env:
+#          dest: '/var/www/dev.iskconnews.org/'
+#          site: 'https://dev.iskconnews.org'
+        run: |
+          echo "env: ${{env}}"
+
+          aws ssm get-parameter --with-decryption --name /inews/infra/dev/wp-config --query "Parameter.Value" --output text >> .env
+
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user ${{env.dest}}
+
+          #echo "WP_HOME=${{env.site}}/" >> .env
+          #echo "WP_SITEURL=${{env.site}}/" >> .env
+
+          rsync -chav \
+            -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
+            --exclude /deploy_key \
+            --exclude .gitkeep \
+            --exclude /.git/ \
+            --exclude /.github/ \
+            --exclude /.idea/ \
+            --exclude /scripts/ \
+            --exclude node_modules/ \
+            --exclude /infra/ \
+            --exclude /logs/ \
+            ./ ${{env.host}}:${{env.dest}}
+
+          echo "Reset permissions"
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www/wp-content/wflogs
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user:nobody ${{env.dest}}
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}/www/wp-content/plugins/wordpress-seo
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 777 ${{env.dest}}www/wp-content/cache
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 777 ${{env.dest}}www/wp-content/w3tc-config
+
+
+
+      - name: Deploy to Prod
+        if: env.branch == 'main'
+        env:
+          dest: '/var/www/prod.iskconnews.org/'
+          site: 'https://iskconnews.org'
+        run: |
+          echo "env: ${{env}}"
+
+          aws ssm get-parameter --with-decryption --name /inews/infra/prod/wp-config --query "Parameter.Value" --output text >> .env
+
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user ${{env.dest}}
+
+          rsync -chav \
+            -e 'ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
+            --exclude /deploy_key \
+            --exclude .gitkeep \
+            --exclude /.git/ \
+            --exclude /.github/ \
+            --exclude /.idea/ \
+            --exclude /scripts/ \
+            --exclude node_modules/ \
+            --exclude /infra/ \
+            --exclude /logs/ \
+            ./ ${{env.host}}:${{env.dest}}
+
+          echo "Reset permissions"
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www/wp-content/wflogs
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user:nobody ${{env.dest}}
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}/www/wp-content/plugins/wordpress-seo
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 777 ${{env.dest}}www/wp-content/cache
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 777 ${{env.dest}}www/wp-content/w3tc-config
+
+      - name: Remove Github Actions IP from security group
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LITESPEED_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
+        if: always()

@@ -20,3 +20,9 @@ dnf install -y lsphp82 lsphp82-common \
     lsphp82-soap \
     lsphp82-xml \
     lsphp82-zip
+
+
+cd /tmp
+curl -sS https://getcomposer.org/installer | /usr/local/lsws/lsphp82/bin/php
+mv composer.phar /usr/local/bin/composer
+ln -s /usr/local/bin/composer /usr/bin/composer

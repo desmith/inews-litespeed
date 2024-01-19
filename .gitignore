@@ -11,6 +11,9 @@ pw_db_root.txt
 /db_data/
 /infra/auto_restart/*.zip
 /media/
+/vendor/
+
+.env*
 
 # Log files
 *.log

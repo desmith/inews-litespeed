@@ -17,8 +17,6 @@ SNS_TOPIC_ARN = os.getenv('SNS_TOPIC_ARN')
 def handler(event, context) -> dict:
     ec2 = boto3.client('ec2')
 
-    ret = None
-    newstate = {"state": "n/a"}
     logger.info(f'## EVENT: {event}')
     logger.info(f'## CONTEXT: {context}')
 
@@ -36,17 +34,23 @@ def handler(event, context) -> dict:
         }
     ]
 
-    # _instance_ids = []
     instances = []
     _res = ec2.describe_instances(Filters=filters)
     all_instances = _res['Reservations'][0]['Instances']
     for instance in all_instances:
         _id = instance['InstanceId']
         _state = instance['State']['Name']
+        _name = None
+        for tag in instance['Tags']:
+            if tag['Key'] == 'Name':
+                _name = tag['Value']
+                break
+
         instances.append(
             {
                 "id": _id,
-                "state": _state
+                "state": _state,
+                "name": _name
             }
         )
 
@@ -59,6 +63,7 @@ def handler(event, context) -> dict:
         if _command == 'stop':
             _stop_these = []
             for _instance in instances:
+                _instance['source'] = 'EventBus'
                 if _instance['state'] == 'running':
                     _stop_these.append(_instance['id'])
                     _instance['state'] = "Stopped"
@@ -66,7 +71,7 @@ def handler(event, context) -> dict:
                     _instance['state'] = f"Instance {_instance['id']} was not running, thus could not be stopped ..."
 
             if _stop_these:  # make sure we have something to stop...
-                ec2.stop_instances([_stop_these])
+                ec2.stop_instances(InstanceIds=_stop_these)
 
     else:
         # called directly via URL...
@@ -84,6 +89,7 @@ def handler(event, context) -> dict:
             if param == 'action' and value == 'stop':
                 _stop_these = []
                 for _instance in instances:
+                    _instance['source'] = 'Lambda'
                     if _instance['state'] == 'running':
                         _stop_these.append(_instance['id'])
                         _instance['state'] = "Stopped"
@@ -98,6 +104,7 @@ def handler(event, context) -> dict:
             elif param == 'action' and value == 'start':
                 _start_these = []
                 for _instance in instances:
+                    _instance['source'] = 'Lambda'
                     if _instance['state'] == 'stopped':
                         _start_these.append(_instance['id'])
                         _instance['state'] = "Started"
