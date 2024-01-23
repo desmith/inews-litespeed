@@ -27,10 +27,10 @@ jobs:
 
       - name: Add Github Actions IP to LiteSpeed Security group
         run: |
-          aws ec2 authorize-security-group-ingress
-            --group-name WebApp-LightSpeedSG
-            --protocol tcp
-            --port 22
+          aws ec2 authorize-security-group-ingress \
+            --group-name WebApp-LightSpeedSG \
+            --protocol tcp \
+            --port 22 \
             --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
       - uses: actions/checkout@v4
