@@ -10,7 +10,7 @@ env:
   branch: ${{ github.ref_name }}
   dest: '/var/www/dev.iskconnews.org/'
   site: 'https://dev.iskconnews.org'
-  host: 'ec2-user@dev.iskconnews.org'
+  host: 'ec2-user@efs.iskconnews.org'
 
   AWS_DEFAULT_REGION: 'us-east-1'
   AWS_ACCESS_KEY_ID: ${{secrets.DMZ_ACCESS_KEY_ID}}
