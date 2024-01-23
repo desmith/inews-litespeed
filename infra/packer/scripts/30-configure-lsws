@@ -7,30 +7,34 @@ env=$1
 echo "********************* 30-configure-lsws *********************"
 echo "\$env: $env"
 
-rm -rf /usr/local/lsws/conf
-ln -s /mnt/efs/lsws/conf /usr/local/lsws/conf
-mv /usr/local/lsws/lsphp74/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp74
-mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp82/bin/lsphp82
-
-ln -s /var/www/phpMyAdmin /usr/local/lsws/pma-dev.iskconnews.org
-
-if [ "$env" == "prod" ]; then
-ln -s /var/www/iskconnews.org /usr/local/lsws/prod.iskconnews.org
-ln -s /mnt/efs/lsws/bin/le_prod /usr/local/lsws/bin/le_prod
-else
-ln -s /var/www/dev.iskconnews.org /usr/local/lsws/dev.iskconnews.org
-ln -s /mnt/efs/lsws/bin/le_dev /usr/local/lsws/bin/le_dev
-fi
-
 rm -rf /etc/letsencrypt
 ln -s /mnt/efs/letsencrypt /etc/letsencrypt
-
-rm -f /usr/local/lsws/admin/conf
-ln -s /mnt/efs/lsws/admin/conf /usr/local/lsws/admin/conf
 
 mkdir -p /tmp/lsws/shm
 chown nobody:nobody /tmp/lsws/shm
 chmod -R 0755 /tmp/lsws/shm
+
+mv /usr/local/lsws/lsphp74/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp74
+mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp82/bin/lsphp82
+
+rm -rf /usr/local/lsws/conf /usr/local/lsws/admin/conf
+
+if [ "$env" == "prod" ]; then
+ln -s /var/www/iskconnews.org/litespeed/admin/prod /usr/local/lsws/admin/conf
+ln -s /var/www/iskconnews.org/litespeed/conf/prod /usr/local/lsws/conf
+ln -s /var/www/iskconnews.org /usr/local/lsws/prod.iskconnews.org
+ln -s /var/www/phpMyAdmin /usr/local/lsws/pma.iskconnews.org
+ln -s /var/www/iskconnews.org/lswsbin/le_prod /usr/local/lsws/bin/le_prod
+
+else
+
+ln -s /var/www/dev.iskconnews.org/litespeed/admin/dev /usr/local/lsws/admin/conf
+ln -s /var/www/dev.iskconnews.org/litespeed/conf/dev /usr/local/lsws/conf
+ln -s /var/www/dev.iskconnews.org /usr/local/lsws/dev.iskconnews.org
+ln -s /var/www/phpMyAdmin /usr/local/lsws/pma-dev.iskconnews.org
+ln -s /var/www/dev.iskconnews.org/lswsbin/le_dev /usr/local/lsws/bin/le_dev
+
+fi
 
 systemctl enable lsws
 systemctl daemon-reload
