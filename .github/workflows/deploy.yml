@@ -9,7 +9,7 @@ on:
 env:
   branch: ${{ github.ref_name }}
   site: 'https://dev.iskconnews.org'
-  host: 'ec2-user@efs.iskconnews.org'
+  host: 'ec2-user@dev.iskconnews.org'
   dest: '/var/www/dev.iskconnews.org/'
 
   AWS_DEFAULT_REGION: 'us-east-1'
@@ -55,7 +55,7 @@ jobs:
           echo "Deploying to ${{env.branch}}"
           echo "env.host: ${{ env.host }}"
 
-          echo "${{secrets.DMZ_DEPLOY_KEY}}" > ./deploy_key
+          echo "${{secrets.ICNEWS_DEPLOY_KEY}}" > ./deploy_key
           chmod 600 ./deploy_key
 
           echo "# Local environment vars" > .env
@@ -104,8 +104,10 @@ jobs:
       - name: Deploy to Prod
         if: env.branch == 'main'
         env:
-          dest: '/var/www/prod.iskconnews.org/'
           site: 'https://iskconnews.org'
+          host: 'ec2-user@prod.iskconnews.org'
+          dest: '/var/www/prod.iskconnews.org/'
+
         run: |
           echo "env: ${{env}}"
 
