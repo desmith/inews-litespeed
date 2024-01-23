@@ -1,0 +1,41 @@
+docRoot                   $SERVER_ROOT/dev.iskconnews.org/www
+vhDomain                  dev.iskconnews.org
+enableGzip                1
+enableBr                  1
+enableIpGeo               0
+
+errorlog $VH_ROOT/logs/error.log {
+  useServer               0
+  logLevel                NOTICE
+  keepDays                7
+  compressArchive         1
+}
+
+accesslog access.log {
+  useServer               0
+  logHeaders              7
+  keepDays                7
+  compressArchive         1
+}
+
+index  {
+  useServer               0
+  indexFiles              index.php, index.html
+  autoIndex               0
+}
+
+scripthandler  {
+  add                     lsapi:lsphp82 php
+}
+
+rewrite  {
+  enable                  0
+  autoLoadHtaccess        0
+RewriteEngine On
+RewriteBase /
+RewriteRule ^/index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+}
+

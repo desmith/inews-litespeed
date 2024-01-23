@@ -1,0 +1,185 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  no_log: "{{ molecule_no_log }}"
+  vars:
+    molecule_scenario_name: "{{ lookup('env', 'MOLECULE_SCENARIO_NAME') }}"
+    molecule_role_name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+    ssh_user: ec2-user
+    ssh_port: 22
+    key_pair_name: "molecule-{{ molecule_role_name }}"
+    key_pair_path: "{{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') }}/ssh_key"
+  tasks:
+    - name: lookup primary-vpc
+      ec2_vpc_net_info:
+        filters:
+          "tag:sx_name": primary
+      register: vpc_info
+
+    - name: set vpc_id
+      set_fact:
+        vpc_id: "{{ vpc_info.vpcs|map(attribute='vpc_id')|list|first }}"
+
+    - debug:
+        var: vpc_id
+
+    - name: lookup private-fe subnet
+      ec2_vpc_subnet_info:
+        filters:
+          vpc-id: "{{ vpc_id }}"
+          "tag:sx_network": private-fe
+      register: subnet_info
+
+    - name: set subnet_id
+      set_fact:
+        subnet_id: "{{ subnet_info.subnets|map(attribute='subnet_id')|list|first }}"
+
+    - debug:
+        var: subnet_id
+
+    - name: lookup all-sg group
+      ec2_group_info:
+        filters:
+          vpc-id: "{{ vpc_id }}"
+          "tag:sx_name": all-sg
+      register: sg_info
+
+    - name: set all_sg_id
+      set_fact:
+        all_sg_id: "{{ sg_info.security_groups|map(attribute='group_id')|list|first }}"
+
+    - debug:
+        var: all_sg_id
+
+    - name: set temporary variable to hold platform info with updated image_ids
+      set_fact:
+        platform:
+          name: "{{ item['name'] }}"
+          instance_type: "{{ item['instance_type'] }}"
+          subnet_id: "{{ subnet_id }}"
+          security_group_id: "{{ all_sg_id }}"
+          # This aws_ssm lookup is not working on mac m1 for some reason, so using env var instead
+          # image_id: "{{ lookup('aws_ssm', item['image_id']) if item['image_id'] is not match('ami-*') else item['image_id']}}"
+          image_id: "{{ lookup('env', 'AL2_AMI_ID') }}"
+      with_items: "{{ molecule_yml.platforms }}"
+      register: platforms
+
+    - set_fact:
+        platform: "{{ item.item | combine(item.ansible_facts.platform) }}"
+      with_items: "{{ platforms.results }}"
+      register: platforms
+
+    - set_fact:
+        molecule_yml: "{{ molecule_yml | combine({'platforms': platforms.results | map(attribute='ansible_facts.platform') | list }) }}"
+
+    - name: output molecule_yml after transform
+      debug:
+        var: molecule_yml
+
+    - name: Test for presence of local keypair
+      stat:
+        path: "{{ key_pair_path }}"
+      register: keypair_local
+
+    - name: Delete remote keypair
+      ec2_key:
+        name: "{{ key_pair_name }}"
+        state: absent
+      when: not keypair_local.stat.exists
+
+    - name: Create keypair
+      ec2_key:
+        name: "{{ key_pair_name }}"
+      register: keypair
+
+    - name: Persist the keypair
+      copy:
+        dest: "{{ key_pair_path }}"
+        content: "{{ keypair.key.private_key }}"
+        mode: 0600
+      when: keypair.changed
+
+    - name: Create molecule instance(s)
+      ec2_instance:
+        key_name: "{{ key_pair_name }}"
+        image_id: "{{ async_item.image_id }}"
+        instance_type: "{{ async_item.instance_type }}"
+        vpc_subnet_id: "{{ async_item.subnet_id }}"
+        security_group: "{{ async_item.security_group_id }}"
+        tags:
+          Name: "{{ async_item.name }}"
+          app: af
+          env: int
+          role: "{{ molecule_role_name }}"
+          scenario: "{{ molecule_scenario_name }}"
+        filters:
+          instance-state-name: running
+          tag:instance: "{{ async_item.name }}"
+        wait: true
+        network:
+          assign_public_ip: false
+      register: server
+      loop: "{{ molecule_yml.platforms }}"
+      loop_control:
+        loop_var: "async_item"
+      async: 7200
+      poll: 0
+
+    - name: Wait for instance(s) creation to complete
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      register: ec2_jobs
+      until: ec2_jobs.finished
+      retries: 300
+      with_items: "{{ server.results }}"
+
+    - debug:
+        var: server
+
+    # Mandatory configuration for Molecule to function.
+
+    - name: Populate instance config dict
+      set_fact:
+        instance_conf_dict: {
+          'instance': "{{ item.instances[0].tags.Name }}",
+          'address': "{{ item.instances[0].private_ip_address }}",
+          'user': "{{ ssh_user }}",
+          'port': "{{ ssh_port }}",
+          'identity_file': "{{ key_pair_path }}",
+          'instance_ids': ["{{ item.instances[0].instance_id }}"], }
+      register: instance_config_dict
+      loop: "{{ ec2_jobs.results }}"
+      when: server.changed | bool
+
+    - debug:
+        var: instance_config_dict
+
+    - name: Convert instance config dict to a list
+      set_fact:
+        instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
+      when: server.changed | bool
+
+    - debug:
+        var: instance_conf
+
+    - name: Dump instance config
+      copy:
+        content: "{{ instance_conf | to_json | from_json | to_yaml }}"
+        dest: "{{ molecule_instance_config }}"
+      when: server.changed | bool
+
+    - name: Wait for SSH
+      wait_for:
+        port: "{{ ssh_port }}"
+        host: "{{ item.address }}"
+        search_regex: SSH
+        delay: 10
+        timeout: 320
+      delegate_to: localhost
+      with_items: "{{ lookup('file', molecule_instance_config) | from_yaml }}"
+
+    - name: Wait for boot process to finish
+      pause:
+        minutes: 1

@@ -1,0 +1,184 @@
+# Trim new lines and copy to clipboard
+#alias c='tr -d '\n' | pbcopy'
+
+alias fpm.start='sudo systemctl start php-fpm"
+alias fpm.stop='sudo systemctl stop php-fpm"
+alias fpm.restart='sudo systemctl restart php-fpm"
+
+alias nginx.start='sudo launchctl load /Library/LaunchAgents/homebrew.mxcl.nginx.plist'
+alias nginx.stop='sudo launchctl unload /Library/LaunchAgents/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop && nginx.start'
+alias nginx.logs.error='tail -250f /usr/local/etc/nginx/logs/error.log'
+alias nginx.logs.access='tail -250f /usr/local/etc/nginx/logs/access.log'
+alias nginx.logs.default.access='tail -250f /usr/local/etc/nginx/logs/default.access.log'
+alias nginx.logs.default-ssl.access='tail -250f /usr/local/etc/nginx/logs/default-ssl.access.log'
+alias nginx.logs.phpmyadmin.error='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.error.log'
+alias nginx.logs.phpmyadmin.access='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.access.log'
+
+# Checking what directories and files are eating your precious disk space is invaluable too, and sorting the output
+alias duf='du -skh .[!.]* * | sort -h'
+
+# To generate a UUID (universally unique identifier) quickly:
+alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
+
+###
+# Global aliases file (~/.aliases)
+###
+# Use sublimetext for editing config files
+# vim aliases
+alias vi='vim'
+alias viA='via'
+#alias vim='nvim'
+alias virc='vi ${DOTDIR}/.vimrc'
+alias vimrc='vim ${DOTDIR}/.config/nvim/init.vim'
+
+# aws aliases
+alias sync3='aws s3 sync --exclude "*.DS_Store*" ./ '
+alias awsi='aws --profile adminuser-icg '
+alias awsg='aws --profile adminuser-govardhana '
+
+alias catgit='cat ./.git/config'
+alias gcat='catgit'
+
+#for fat fingers...
+alias pi='pip '
+alias ecoh='echo'
+alias grpe="grep "
+
+#not sure why we need this, someone is hijacking diff...
+alias diff="/usr/bin/diff "
+
+# git aliases
+alias gits="git status"
+alias gitpo="git push -u origin master"
+alias gitc="git commit "
+
+# Launchd aliases
+alias lcl="launchctl load -w "
+alias lcu="launchctl unload -w "
+
+#utility aliases
+alias bgc="bgcolors"
+alias cls="clear"
+alias clr="clear"
+alias ip="curl icanhazip.com"  # Your public IP address
+
+alias howto="cheat "
+
+alias la="ls -la"
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias curdate='date +"%d-%m-%Y"'
+
+alias ssh="TERM=xterm-256color ssh"
+
+### important safety nets
+alias ln="ln -s"
+alias md="mkdir"
+alias mdcd="mkdcd"
+alias pse="ps -ef"
+#alias rm="trash"
+alias rd="trash"
+alias rd="rm -rfi"
+
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
+alias grep="grep -i --color=auto "
+
+alias tailf="tail -f"
+alias tf='tailf'
+alias tfl="tail -f /var/log/messages"
+alias tfm="tail -f /var/log/messages"
+alias tfmsg="tail -f /var/log/messages"
+alias tfmail="tail -f /var/log/maillog"
+alias ur="uname -r"
+
+
+alias net="netstat -an | more"
+alias more="less"
+alias mnode="service munin-node restart"
+alias mreload=" /usr/share/munin/munin-update --force-root"
+alias mupdate=' /usr/share/munin/munin-update --force-root'
+alias lu='nslookup'
+alias more='less'
+alias pear="php /usr/lib/php/pear/pearcmd.php"
+alias pecl="php /usr/lib/php/pear/peclcmd.php"
+
+alias scp='scp -Cp'
+alias rc='sudo red-carpet &'
+alias rp='sudo rpm -Uvvvh'
+alias rpq='sudo rpm -qa | grep'
+alias rps='sudo rpm -qa | grep'
+alias rpe='sudo rpm -e'
+alias tff='tail -f'
+alias tffm='multitail -f'
+alias tfw='tail -f /var/log/httpd/www.prastha.com-access.log'
+alias tm='mmate '
+alias tx='tar xvf'
+alias tz='tar xvfz'
+alias mux='tmuxinator'
+
+#alias tmux='tmux -CC'
+alias zlist='zfs list -t snapshot '
+
+alias yt='ytree'
+
+alias find_spam='grep -r "eval(gzinflate(base64_decode" * '
+alias find_spam='echo "looking for nasty stuff..."; grep -r "eval(gzinflate(base64_decode" * '
+
+
+# Get week number
+alias week='date +%V'
+
+# Stopwatch
+alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+
+# View HTTP traffic
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# MD5sum
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# OS X has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# Recursively delete `.DS_Store` files
+alias rmstore="find . -type f -name '*.DS_Store' -ls -delete"
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Ring the terminal bell, and put a badge on Terminal.app’s Dock icon
+# (useful when executing time-consuming commands)
+alias badge="tput bel"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "$method"="lwp-request -m '$method'"
+done
+
+# Make Grunt print stack traces by default
+command -v grunt > /dev/null && alias grunt="grunt --stack"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"

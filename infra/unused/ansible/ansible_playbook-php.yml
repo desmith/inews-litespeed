@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  roles:
+
+    - role: prebake
+
+    - role: ansible-role-php
+      php_version:
+        - "8.1"
+
+    - role: ansible-role-rds
+
+    - role: ansible-role-aws-creds
+      become_user: ec2-user
+
+    - role: ansible-role-awsv2

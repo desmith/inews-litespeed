@@ -1,0 +1,1 @@
+*/15 * * * * root sleep $[$RANDOM \% 15]m; /usr/local/bin/post_disk_geometry >> /var/tmp/post_disk_geometry.log 2>&1

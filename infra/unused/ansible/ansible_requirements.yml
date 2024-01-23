@@ -1,0 +1,3 @@
+---
+- src: ssh://git@bitbucket.prod.soundexchange.com:7999/an/ansible-role-pyenv.git
+  scm: git

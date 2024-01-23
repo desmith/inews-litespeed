@@ -1,0 +1,24 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: yes
+  roles:
+
+    - role: prebake
+
+    - role: ansible-role-pyenv
+      python_versions:
+        - "3.9"
+        - "3.10"
+      pyenv_user: root
+      become_user: ec2-user
+
+    - role: ansible-role-rds
+
+    - role: ansible-role-pipenv
+      become_user: ec2-user
+
+    - role: ansible-role-aws-creds
+      become_user: ec2-user
+
+    - role: ansible-role-awsv2

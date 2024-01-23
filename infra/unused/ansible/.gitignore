@@ -1,0 +1,10 @@
+galaxy_roles/
+pre/
+venv/
+*.zip
+*.txt
+manifest.json
+packer-output.json
+
+.python-version
+package.yml

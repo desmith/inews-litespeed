@@ -17,18 +17,16 @@ ln -s /var/www/phpMyAdmin /usr/local/lsws/pma-dev.iskconnews.org
 if [ "$env" == "prod" ]; then
 ln -s /var/www/iskconnews.org /usr/local/lsws/prod.iskconnews.org
 ln -s /mnt/efs/lsws/bin/le_prod /usr/local/lsws/bin/le_prod
-ln -s /mnt/efs/lsws/bin/le_pma /usr/local/lsws/bin/le_pma
 else
 ln -s /var/www/dev.iskconnews.org /usr/local/lsws/dev.iskconnews.org
 ln -s /mnt/efs/lsws/bin/le_dev /usr/local/lsws/bin/le_dev
-ln -s /mnt/efs/lsws/bin/le_pma_dev /usr/local/lsws/bin/le_pma_dev
 fi
 
 rm -rf /etc/letsencrypt
 ln -s /mnt/efs/letsencrypt /etc/letsencrypt
 
-rm -f /usr/local/lsws/admin/conf/admin_config.conf
-ln -s /mnt/efs/lsws/admin/admin_config.conf /usr/local/lsws/admin/conf/admin_config.conf
+rm -f /usr/local/lsws/admin/conf
+ln -s /mnt/efs/lsws/admin/conf /usr/local/lsws/admin/conf
 
 mkdir -p /tmp/lsws/shm
 chown nobody:nobody /tmp/lsws/shm

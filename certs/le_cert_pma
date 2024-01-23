@@ -1,2 +1,0 @@
-certbot certonly --non-interactive --agree-tos -m devaprastha@iskcon.org --webroot -w /usr/local/lsws/pma.iskconnews.org/www -d pma.iskconnews.org 
-

@@ -1,0 +1,26 @@
+docRoot                   $VH_ROOT
+vhDomain                  pma.iskconnews.org
+enableGzip                1
+enableBr                  1
+
+errorlog  {
+  useServer               1
+  logLevel                ERROR
+}
+
+index  {
+  useServer               0
+  indexFiles              index.php
+  autoIndex               0
+}
+
+scripthandler  {
+  add                     lsapi:lsphp php
+}
+
+vhssl  {
+  keyFile                 /etc/letsencrypt/live/pma.iskconnews.org/privkey.pem
+  certFile                /etc/letsencrypt/live/pma.iskconnews.org/fullchain.pem
+  certChain               1
+}
+

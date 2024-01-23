@@ -1,0 +1,18 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: populate service_facts
+    service_facts:
+
+  - debug:
+      var: ansible_facts
+
+  - name: ensure the jenkins service exists
+    assert:
+      that:
+        - ansible_facts.services["jenkins.service"] is defined
+        - ansible_facts.services["jenkins.service"].status == "enabled"

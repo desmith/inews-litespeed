@@ -1,0 +1,14 @@
+[Unit]
+Description=High memory utilization cloudwatch alarm
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/cloudwatch_memory_alarm
+StandardOutput=journal
+Restart=on-failure
+RestartSec=5
+
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,35 @@
+---
+# dependency:
+#  name: galaxy
+driver:
+  name: ec2
+platforms:
+  - name: jenkins-controller-prebake
+    region: us-east-1
+    image_id: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-ebs
+    instance_type: t3.micro
+    subnet_id: subnet-92d45efc
+    tags:
+      app: af
+      Name: molecule
+lint: |
+  set -e
+  pipenv run yamllint .
+provisioner:
+  name: ansible
+  log: true
+  env:
+    ANSIBLE_ROLES_PATH: ../../roles
+verifier:
+  name: ansible
+scenario:
+  test_sequence:
+    - lint
+    # - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - destroy
