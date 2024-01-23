@@ -1,6 +1,6 @@
 <?php
 
-define( 'AUTOLOAD_PHP', '/vendor/autoload.php' );
+const AUTOLOAD_PHP = '/vendor/autoload.php';
 if(file_exists(__DIR__ . AUTOLOAD_PHP)) {
     require_once __DIR__ . AUTOLOAD_PHP;
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -12,9 +12,9 @@ if(file_exists(dirname(__DIR__) . AUTOLOAD_PHP )) {
     $dotenv->load();
 }
 
-define('WP_CACHE', true);
-define('FS_METHOD', 'direct');
-define('DISABLE_WP_CRON', true);
+const WP_CACHE = true;
+const FS_METHOD = 'direct';
+const DISABLE_WP_CRON = true;
 
 /**
  * The base configuration for WordPress
@@ -41,10 +41,10 @@ define( 'DB_PASSWORD', getenv('DB_PASSWORD'));
 define( 'DB_HOST', getenv('DB_HOST'));
 
 /** Database charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8mb4' );
+const DB_CHARSET = 'utf8mb4';
 
 /** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', 'utf8mb4_unicode_ci' );
+const DB_COLLATE = 'utf8mb4_unicode_ci';
 
 /**#@+
  * Authentication unique keys and salts.
@@ -91,15 +91,15 @@ $table_prefix = 'ick_';
  */
 
 
-//define( 'WP_DEBUG', true );
-//define( 'WP_DEBUG_LOG', true );
-define( 'WP_DEBUG_DISPLAY', false );
+//const WP_DEBUG = true;
+//const WP_DEBUG_LOG = true;
+const WP_DEBUG_DISPLAY = false;
 
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-//define('FORCE_SSL_ADMIN', false);
-//define('FORCE_SSL_LOGIN', false);
+//const FORCE_SSL_ADMIN = false;
+//const FORCE_SSL_LOGIN = false;
 
 if (isset($_SERVER['HTTP_HOST'])) {
 	define('WP_SITEURL', 'https://' . $_SERVER['HTTP_HOST'] . '/');
@@ -107,7 +107,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
 }
 
 
-if (isset($_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO']) && $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] === 'https') { $_SERVER['HTTPS'] = 'on'; }
+//if (isset($_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO']) && $_SERVER['HTTP_CLOUDFRONT_FORWARDED_PROTO'] === 'https') { $_SERVER['HTTPS'] = 'on'; }
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){ $_SERVER['HTTPS']='on'; }
 
 /* Offload Media to Cloudflare plugin */

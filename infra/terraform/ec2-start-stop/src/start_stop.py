@@ -26,7 +26,7 @@ def handler(event, context) -> dict:
     filters = [
         {
             'Name': 'tag:auto_start_stop',
-            'Values': ['True']
+            'Values': ['true']
         },
         {
             'Name': 'tag:env',
@@ -36,7 +36,10 @@ def handler(event, context) -> dict:
 
     instances = []
     _res = ec2.describe_instances(Filters=filters)
-    all_instances = _res['Reservations'][0]['Instances']
+    if not _res['Reservations']:
+        return {'message': 'No instances found with the given filters'}
+
+    all_instances = _res['Reservations'][0].get('Instances')
     for instance in all_instances:
         _id = instance['InstanceId']
         _state = instance['State']['Name']

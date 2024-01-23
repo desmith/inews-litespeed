@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="PYTHON_MODULE" version="4">
+<module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/src" isTestSource="false" packagePrefix="CF\" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/next3-offload" isTestSource="false" packagePrefix="Next3Offload" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/give/src" isTestSource="false" packagePrefix="Give" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/searchwp/includes" isTestSource="false" packagePrefix="SearchWP" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/translatepress-developer/add-ons-pro/automatic-language-detection/assets/lib" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wp-mail-smtp-pro/src" isTestSource="false" packagePrefix="WPMailSMTP" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wp-mail-smtp/src" isTestSource="false" packagePrefix="WPMailSMTP" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wp-rss-aggregator/includes" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wp-rss-aggregator/lib" isTestSource="false" packagePrefix="RebelCode" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wpforms-captcha/src" isTestSource="false" packagePrefix="WPFormsCaptcha" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wpforms-lite/src" isTestSource="false" packagePrefix="WPForms" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wpforms/pro/libs/bjeavons/zxcvbn-php/src" isTestSource="false" packagePrefix="ZxcvbnPhp" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-content/plugins/wpforms/src" isTestSource="false" packagePrefix="WPForms" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+      <sourceFolder url="file://$MODULE_DIR$/www/wp-includes/sodium_compat/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/cloudflare/cf-ip-rewrite" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/www/wp-content/plugins-disabled/cloudflare/vendor/symfony/polyfill-php72" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
-  <component name="PyDocumentationSettings">
-    <option name="format" value="PLAIN" />
-    <option name="myDocStringFormat" value="Plain" />
-  </component>
   <component name="SonarLintModuleSettings">
-    <option name="uniqueId" value="5f4d29b8-da17-456d-a01d-e2f128931b85" />
-  </component>
-  <component name="TemplatesService">
-    <option name="TEMPLATE_FOLDERS">
-      <list>
-        <option value="$MODULE_DIR$/litespeed/conf/templates" />
-      </list>
-    </option>
+    <option name="uniqueId" value="5da5d274-eacc-49e8-a7a3-9951fd3d5fc6" />
   </component>
 </module>

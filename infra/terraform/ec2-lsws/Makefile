@@ -4,7 +4,7 @@ SSH_CONF_DIR ?= $(HOME)/.ssh/conf.d
 
 VPC_ID := $(shell aws ec2 describe-vpcs --filters Name=tag:network,Values=primary --query 'Vpcs[].VpcId' --output text)
 #SUBNET_ID := $(shell aws ec2 describe-subnets --filters Name=vpc-id,Values=$(VPC_ID) Name=tag:network,Values=private --query 'Subnets[0].SubnetId' --output text)
-SUBNET_ID := 'subnet-5b4d9954'
+
 #SECURITY_GROUP_ID := $(shell aws ec2 describe-security-groups --filters Name=tag:Name,Values=adminSG Name=vpc-id,Values=$(VPC_ID) --query 'SecurityGroups[].GroupId' --output text)
 
 #AMI_ID := ami-0efb76882af9859da  # CentOS 9 Stream
@@ -24,7 +24,6 @@ plan:
 	terraform plan \
 		-var vpc_id=$(VPC_ID) \
 		-var env=$(ENV) \
-		-var subnet_id=$(SUBNET_ID) \
 		-var-file=environments/$(ENV).tfvars \
 		-var ssh_conf_dir=$(SSH_CONF_DIR) \
 		--out=tfplan
@@ -38,7 +37,6 @@ destroy:
 	terraform destroy \
 		-var vpc_id=$(VPC_ID) \
 		-var env=$(ENV) \
-		-var subnet_id=$(SUBNET_ID) \
 		-var-file=environments/$(ENV).tfvars \
 		-var ssh_conf_dir=$(SSH_CONF_DIR) \
 		-auto-approve

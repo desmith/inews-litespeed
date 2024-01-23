@@ -1,15 +1,10 @@
 locals {
 
-  instance_name = "${var.app_name}-${var.component}-${var.env}.${var.domain}"
-  #  global_tags = {
-  #    Name        = "${var.env}.${var.domain}"
-  #    Environment = var.env
-  #    Terraform   = true
-  #  }
-
+  auto_start_stop = var.env == "dev" ? true : false
+  instance_name = "${var.app_name}-${var.component}-${var.env}"
   target_group_name = var.env == "prod" ? "inews-infra" : "inews-infra-dev"
 
-  boot_template_vars = {
+  user_data_vars = {
     app          = var.app_name
     component    = var.component
     env          = var.env
@@ -23,9 +18,12 @@ locals {
     data.aws_security_group.waf.id
   ])
 
-  #  boot_server_tags = merge(local.global_tags, {
-  #    Name = "boot-server-${var.env}"
-  #  }
-  #  tags = merge(local.global_tags, var.tags)
+  common_tags   = {
+    app       = var.app_name
+    component = var.component
+    env       = var.env
+    Environment = var.env
+    Terraform   = true
+  }
 
 }

@@ -233,4 +233,13 @@ build {
         execute_command = ["bash", "-c", "{{.Vars}} {{.Script}} ${var.env}"]
         script          = "./scripts/99-post-build"
     }
+
+    provisioner "shell" {
+        inline = [
+            "echo '===== LSWS ADMIN PASSWORD ====='",
+            "sudo cat /usr/local/lsws/adminpasswd",
+            "echo '===== END FILE CONTENTS ====='"
+        ]
+    }
+
 }

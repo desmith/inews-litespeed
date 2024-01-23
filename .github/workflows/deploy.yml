@@ -13,8 +13,6 @@ env:
   host: 'ec2-user@efs.iskconnews.org'
 
   AWS_DEFAULT_REGION: 'us-east-1'
-#  AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
-#  AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
 
   AWS_ACCESS_KEY_ID: $(aws ssm get-parameter
     --with-decryption

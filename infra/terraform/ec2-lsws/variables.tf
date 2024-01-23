@@ -6,11 +6,12 @@ variable "keypair_name" { type = string }
 #variable "security_group_id" { type = string }
 variable "vpc_id" { type = string }
 variable "subnet_id" { type = string }
-variable "target_group_host_headers" { type = list(string) }
-variable "target_group_host_headers_admin" { type = list(string) }
+#variable "target_group_host_headers" { type = list(string) }
+#variable "target_group_host_headers_admin" { type = list(string) }
 variable "ssh_conf_dir" { type = string }
-variable "alb_certificate_arn" { type = string }
-variable "alb_arn" { type = string }
+#variable "alb_certificate_arn" { type = string }
+#variable "alb_arn" { type = string }
+variable "ec2_eip_name" { type = string }
 
 variable "domain" {
   type    = string
@@ -67,17 +68,17 @@ variable "ec2_disable_api_termination" {
   default = false
 }
 
-variable "https_listener_arn" {
-  type    = string
-  default = "arn:aws:elasticloadbalancing:us-east-1:793753096261:listener/app/ICG-ELB/ed8f2ac6e693c7b2/44d4726e5f6e62db"
-}
-
-variable "elb_listener_priority" {
-  type    = number
-  default = 198
-}
-
-variable "elb_listener_priority_admin" {
-  type    = number
-  default = 199
-}
+#variable "https_listener_arn" {
+#  type    = string
+#  default = "arn:aws:elasticloadbalancing:us-east-1:793753096261:listener/app/ICG-ELB/ed8f2ac6e693c7b2/44d4726e5f6e62db"
+#}
+#
+#variable "elb_listener_priority" {
+#  type    = number
+#  default = 198
+#}
+#
+#variable "elb_listener_priority_admin" {
+#  type    = number
+#  default = 199
+#}
