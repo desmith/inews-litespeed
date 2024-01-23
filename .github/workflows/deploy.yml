@@ -93,7 +93,7 @@ jobs:
 
           echo "Reset permissions"
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www/wp-content/wflogs
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R lsadm:lsadm ${{env.dest}}litespeed
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R lsadm ${{env.dest}}litespeed
           #ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user:nobody ${{env.dest}}litespeed
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}/www/wp-content/plugins/wordpress-seo
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 777 ${{env.dest}}www/wp-content/cache
