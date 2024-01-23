@@ -55,7 +55,7 @@ jobs:
           echo "Deploying to ${{env.branch}}"
           echo "env.host: ${{ env.host }}"
 
-          echo "${{secrets.DEPLOY_KEY_BASTION}}" > ./deploy_key
+          echo "${{secrets.DMZ_DEPLOY_KEY}}" > ./deploy_key
           chmod 600 ./deploy_key
 
           echo "# Local environment vars" > .env
