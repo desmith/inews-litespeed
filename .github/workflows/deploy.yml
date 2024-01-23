@@ -13,19 +13,8 @@ env:
   host: 'ec2-user@efs.iskconnews.org'
 
   AWS_DEFAULT_REGION: 'us-east-1'
-
-  AWS_ACCESS_KEY_ID: $(aws ssm get-parameter
-    --with-decryption
-    --name /infra/DMZ_ACCESS_KEY_ID
-    --query "Parameter.Value"
-    --output text)
-
-  AWS_SECRET_ACCESS_KEY: $(aws ssm get-parameter
-    --with-decryption
-    --name /infra/DMZ_SECRET_ACCESS_KEY
-    --query "Parameter.Value"
-    --output text)
-
+  AWS_ACCESS_KEY_ID: ${{secrets.DMZ_ACCESS_KEY_ID}}
+  AWS_SECRET_ACCESS_KEY: ${{secrets.DMZ_SECRET_ACCESS_KEY}}
 
 jobs:
   deploy:
@@ -38,10 +27,11 @@ jobs:
 
       - name: Add Github Actions IP to LiteSpeed Security group
         run: |
-          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LITESPEED_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
-#        env:
-#          AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
+          aws ec2 authorize-security-group-ingress
+            --group-id ${{env.LITESPEED_SG_ID}}
+            --protocol tcp
+            --port 22
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
       - uses: actions/checkout@v4
         with:
