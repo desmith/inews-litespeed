@@ -10,7 +10,7 @@ env:
   branch: ${{ github.ref_name }}
   dest: '/var/www/dev.iskconnews.org/'
   site: 'https://dev.iskconnews.org'
-  host: 'ec2-user@efs.iskconnews.org'
+  host: 'ec2-user@dev.iskconnews.org'
 
   AWS_DEFAULT_REGION: 'us-east-1'
   AWS_ACCESS_KEY_ID: ${{secrets.DMZ_ACCESS_KEY_ID}}
@@ -50,9 +50,6 @@ jobs:
 
       - name: Deploy to Dev
         if: env.branch == 'dev'
-#        env:
-#          dest: '/var/www/dev.iskconnews.org/'
-#          site: 'https://dev.iskconnews.org'
         run: |
           echo "env: ${{env}}"
 
@@ -119,8 +116,10 @@ jobs:
 
       - name: Remove Github Actions IP from security group
         run: |
-          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LITESPEED_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
-#        env:
-#          AWS_ACCESS_KEY_ID: ${{ secrets.DMZ_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.DMZ_SECRET_ACCESS_KEY }}
+          aws ec2 revoke-security-group-ingress \
+            --group-id ${{vars.LITESPEED_SG_ID}} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
         if: always()
