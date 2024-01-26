@@ -5,7 +5,7 @@ export PATH=/usr/local/bin:$PATH
 
 env=$1
 echo "********************* 12-install-fstab *********************"
-echo "Environment: $env"
+echo "\$env: $env"
 
 mkdir -p /mnt/efs
 rm -rf /var/www

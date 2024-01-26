@@ -19,8 +19,8 @@
     export PYENV_ROOT="/root/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     export PIPENV_YES=true
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+#    eval "$(pyenv init -)"
+#    eval "$(pyenv virtualenv-init -)"
 
     #++ pyenv init -
     #/var/lib/cloud/instance/scripts/part-001: line 26: pyenv: command not found

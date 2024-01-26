@@ -16,6 +16,7 @@ chmod -R 0755 /tmp/lsws/shm
 
 mv /usr/local/lsws/lsphp74/bin/lsphp /usr/local/lsws/lsphp74/bin/lsphp74
 mv /usr/local/lsws/lsphp82/bin/lsphp /usr/local/lsws/lsphp82/bin/lsphp82
+ln -s /usr/local/lsws/lsphp82/bin/php /usr/local/bin/php
 
 rm -rf /usr/local/lsws/conf /usr/local/lsws/admin/conf
 

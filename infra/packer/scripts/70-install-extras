@@ -3,13 +3,25 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
+env=$1
 echo "********************* 70-install-extras *********************"
+echo "\$env: $env"
 
 curl -sfL https://direnv.net/install.sh | bash
+
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
 
 aws s3 sync s3://dotfiles-linux/ /home/ec2-user/.dotfiles/
 chown -R ec2-user:ec2-user /home/ec2-user/.dotfiles
 ln -s /home/ec2-user/.dotfiles /root/.dotfiles
 git --git-dir="$HOME/.dotfiles/.git" --work-tree="$HOME" reset --hard
 
-crontab /root/crontab.src
+# We need to initialize this last so it doesn't prematurely trigger high load on the instance
+# which would cause the instance to be restarted
+
+if [ "$env" == "prod" ]; then
+    crontab /root/crontab.src
+fi

@@ -3,7 +3,9 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
+env=$1
 echo "********************* 15-install-ssh-keys *********************"
+echo "\$env: $env"
 
 # This is being done so we can log into the instance to debug issues.
 cat <<EOF >> ~/.ssh/authorized_keys

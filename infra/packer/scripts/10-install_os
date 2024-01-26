@@ -3,7 +3,10 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
+env=$1
 echo "********************* 10-install_os *********************"
+echo "\$env: $env"
+
 dnf update -y
 dnf config-manager --set-enabled crb
 dnf install -y epel-release

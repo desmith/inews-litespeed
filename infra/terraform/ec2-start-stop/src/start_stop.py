@@ -57,7 +57,7 @@ def handler(event, context) -> dict:
             }
         )
 
-        logger.info(f'instance: {_id}, state: {_state}')
+        logger.info(f"instance: {_id}, state: {_state}")
 
     if source == 'event_bus':
         _command = event.get('command')
@@ -66,12 +66,16 @@ def handler(event, context) -> dict:
         if _command == 'stop':
             _stop_these = []
             for _instance in instances:
+                 _state = _instance['state']
                 _instance['source'] = 'EventBus'
-                if _instance['state'] == 'running':
+                if _state == 'running':
                     _stop_these.append(_instance['id'])
                     _instance['state'] = "Stopped"
+                    logger.info(f'Stopping instance {_instance["id"]} ...')
+                elif _state == 'stopped':
+                    _instance['state'] = f"Instance {_instance['id']} was already stopped."
                 else:
-                    _instance['state'] = f"Instance {_instance['id']} was not running, thus could not be stopped ..."
+                    _instance['state'] = f"Instance {_instance['id']} was not running, thus could not be stopped."
 
             if _stop_these:  # make sure we have something to stop...
                 ec2.stop_instances(InstanceIds=_stop_these)

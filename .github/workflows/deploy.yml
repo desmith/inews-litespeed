@@ -64,11 +64,10 @@ jobs:
       - name: Deploy to Dev
         if: env.branch == 'dev'
         run: |
-          echo "env: ${{env}}"
 
           aws ssm get-parameter --with-decryption --name /inews/infra/dev/wp-config --query "Parameter.Value" --output text >> .env
 
-          echo "sudo chown -R ec2-user ${{env.dest}}..."
+          echo "sudo chown -R ec2-user ${{env.dest}}"
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user ${{env.dest}}
 
           #echo "WP_HOME=${{env.site}}/" >> .env

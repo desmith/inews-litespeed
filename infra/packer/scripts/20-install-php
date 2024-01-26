@@ -3,7 +3,9 @@
 set -e -o pipefail      # exit if there are any errors
 export PATH=/usr/local/bin:$PATH
 
+env=$1
 echo "********************* 20-install-php *********************"
+echo "\$env: $env"
 
 dnf install -y lsphp82 lsphp82-common \
     lsphp82-bcmath \

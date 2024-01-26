@@ -149,7 +149,7 @@ build {
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/10-install_os"
     }
 
@@ -159,12 +159,12 @@ build {
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/15-install-ssh-keys"
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/20-install-php"
     }
 
@@ -182,7 +182,7 @@ build {
         destination = "/tmp/aws_credentials"
     }
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/40-install-awscli"
     }
 
@@ -191,17 +191,18 @@ build {
         destination = "/tmp/amazon-cloudwatch-agent.json"
     }
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/50-install-cwagent"
     }
 
     provisioner "shell" {
-        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+        execute_command = "{{ .Vars }} sudo -E -S bash '{{ .Path }}' ${var.env}"
         script          = "./scripts/70-install-extras"
     }
 
     provisioner "shell" {
-        script = "./scripts/80-install-optional"
+        execute_command = "{{ .Vars }} -E -S bash '{{ .Path }}' ${var.env}"
+        script          = "./scripts/75-install-extras-ec2-user"
     }
 
     #    provisioner "shell" {
