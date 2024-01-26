@@ -67,8 +67,8 @@ jobs:
 
           aws ssm get-parameter --with-decryption --name /inews/infra/dev/wp-config --query "Parameter.Value" --output text >> .env
 
-          #echo "sudo chown -R ec2-user ${{env.dest}}"
-          #ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user ${{env.dest}}
+          echo "sudo chown -R ec2-user ${{env.dest}}"
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chown -R ec2-user ${{env.dest}}
 
           #echo "WP_HOME=${{env.site}}/" >> .env
           #echo "WP_SITEURL=${{env.site}}/" >> .env
@@ -95,11 +95,7 @@ jobs:
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chgrp -R lsadm ${{env.dest}}litespeed
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}litespeed
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chgrp -R nobody ${{env.dest}}www
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}www
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www/wp-content/wflogs
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}/www/wp-content/plugins
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 0777 ${{env.dest}}www/wp-content/cache
-          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod 0777 ${{env.dest}}www/wp-content/w3tc-config
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www
 
       - name: Deploy to Prod
         if: env.branch == 'main'
