@@ -93,6 +93,7 @@ jobs:
 
           echo "Reset permissions"
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chgrp -R lsadm ${{env.dest}}litespeed
+          ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}litespeed
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chgrp -R nobody ${{env.dest}}www
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+w ${{env.dest}}www
           ssh -i ./deploy_key -o StrictHostKeyChecking=no ${{env.host}} sudo chmod -R g+rw ${{env.dest}}www/wp-content/wflogs
