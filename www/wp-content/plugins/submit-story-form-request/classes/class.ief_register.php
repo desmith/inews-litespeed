@@ -1,34 +1,33 @@
 <?php
 /**
  * Custom Submit Story Form Request Installation.
- *
  */
 class ief_register {
 
-	protected static $instance;
+    protected static $instance;
 
-    //Initialization of the instance
-    public static function init()
-    {
-        is_null( self::$instance ) AND self::$instance = new self;
+    // Initialization of the instance
+    public static function init() {
+        if ( is_null( self::$instance ) ) {
+            self::$instance = new self();
+        }
         return self::$instance;
     }
 
-    //Activation of the plugin
-    function ief_install()
-    {
+    // Activation of the plugin
+    public static function ief_install() {
         ob_start();
         global $wpdb;
-        $table_name = $wpdb->prefix . 'story_requests';
+        $table_name      = $wpdb->prefix . 'story_requests';
         $charset_collate = $wpdb->get_charset_collate();
-        $sql ="CREATE TABLE $table_name (
+        $sql             = "CREATE TABLE $table_name (
                 id INT NOT NULL AUTO_INCREMENT,
                 `wb_fullname` varchar(150) DEFAULT NULL,
-				`wb_email` varchar(150) DEFAULT NULL,
+                `wb_email` varchar(150) DEFAULT NULL,
                 `wb_phone` varchar(150) DEFAULT NULL,
-				`wb_location` varchar(150) DEFAULT NULL,
-				`wb_message` varchar(255) DEFAULT NULL,
-				`cv` varchar(255) DEFAULT NULL,
+                `wb_location` varchar(150) DEFAULT NULL,
+                `wb_message` varchar(255) DEFAULT NULL,
+                `cv` varchar(255) DEFAULT NULL,
                 `ip_addr` varchar(255) DEFAULT NULL,       
                 `added_on` DATETIME NOT NULL,            
                 `updated_on` DATETIME NOT NULL,            
@@ -39,13 +38,15 @@ class ief_register {
         return ob_get_clean();
     }
 
-    //Deactivation of the plugin
-    function ief_uninstall()
-    {
+    // Deactivation of the plugin
+    public static function ief_uninstall() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'story_requests';
-        $sql = "DROP TABLE IF EXISTS $table_name";
-        $wpdb->query($sql);
+        $sql        = "DROP TABLE IF EXISTS $table_name";
+        $wpdb->query( $sql );
     }
 }
+
+// Initialize the class
+ief_register::init();
 ?>
