@@ -62,8 +62,8 @@ $term_id = $queried_object->term_id;
                                 <span><?php echo get_the_date( 'M d, Y' ); ?></span>
                             </div>
                             <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                            <div class="desc"><p><?php the_field('news_short_description'); ?></p></div>
-                            <div class="name"><?php the_field('author_name'); ?></div>
+                            <div class="desc"><p><?php echo wp_kses_post(get_field('news_short_description')); ?></p></div>
+                            <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                             <div class="cat">
                                 <?php
                                        $cat_name = 'category';
@@ -95,8 +95,8 @@ $term_id = $queried_object->term_id;
                                 <span><?php echo get_the_date( 'M d, Y' ); ?></span>
                             </div>
                            <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                           <div class="desc"><p><?php the_field('news_short_description'); ?></p></div>
-                           <div class="name"><?php the_field('author_name'); ?></div>
+                           <div class="desc"><p><?php echo wp_kses_post(get_field('news_short_description')); ?></p></div>
+                           <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                            <div class="cat">
                                 <?php
                                        $cat_name = 'category';

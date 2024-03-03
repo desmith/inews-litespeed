@@ -30,7 +30,7 @@ $term_id = $queried_object->term_id;
                         <img src="<?php echo $banner_image; ?>" alt="big-img" />
                     </figure>
                     <div class="content">
-                        <div class="cat"><?php the_field('author_name'); ?></div>
+                        <div class="cat"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                         <h5 class="sttl"><?php the_title() ?></h5>
                         <a href="javascript:void(0);" class="play_btn videoBoxBtn" data-vlink="<?php the_field('video_link'); ?>">
                           <span>Play</span>
@@ -76,7 +76,7 @@ $term_id = $queried_object->term_id;
                             </figure>
                             
                            <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                           <div class="name"><?php the_field('author_name'); ?></div>
+                           <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                     </div>
                 </div>
         

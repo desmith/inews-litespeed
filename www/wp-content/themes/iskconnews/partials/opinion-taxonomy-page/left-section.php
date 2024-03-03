@@ -58,8 +58,8 @@ $term_id = $queried_object->term_id;
 
                             <div class="inner_box">
                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                <div class="name"><?php the_field('author_name'); ?></div>
-                                <div class="desc"><?php the_field('news_short_description'); ?></div>
+                                <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
+                                <div class="desc"><?php echo wp_kses_post(get_field('news_short_description')); ?></div>
                             </div>
                     </div>
                 </div>
@@ -91,8 +91,8 @@ $term_id = $queried_object->term_id;
                             </figure>
                             <div class="inner_box">
                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                <div class="name"><?php the_field('author_name'); ?></div>
-                                <div class="desc"><?php the_field('news_short_description'); ?></div>
+                                <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
+                                <div class="desc"><?php echo wp_kses_post(get_field('news_short_description')); ?></div>
                             </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ $the_query = new WP_Query( $args );
 
                               <?php if($ads == 6){ ?>
                                  <div class="card card_ads">
-                                   <?php the_field('latest_content_section_ad', 5); ?>
+                                   <?php echo wp_kses_post(get_field('latest_content_section_ad', 5)); ?>
                                    <div class="ad_desc">AD</div>
                                  </div>
                               <?php } ?>
@@ -58,7 +58,7 @@ $the_query = new WP_Query( $args );
                                                 </figure>
 
                                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                                <div class="name"><?php the_field('author_name'); ?></div>
+                                                <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                                 <div class="cat">
                                                      <?php
                                                          $cat_name = 'category';
@@ -87,7 +87,7 @@ $the_query = new WP_Query( $args );
                                     </figure>
 
                                     <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h6>
-                                    <div class="name"><?php the_field('author_name'); ?></div>
+                                    <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                     <div class="cat">
                                       <?php
                                           $cat_name = 'category';

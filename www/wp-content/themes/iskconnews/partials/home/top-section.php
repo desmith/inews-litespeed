@@ -99,7 +99,7 @@
                                         <div class="t_name">
                                             <h1 class="sttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </h1>
-                                            <p class="name"><?php the_field('author_name'); ?></p>
+                                            <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
                                         </div>
                                         <span class="related_ic">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px"
@@ -122,7 +122,7 @@
                                         <div class="t_name">
                                             <h1 class="sttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                             </h1>
-                                            <p class="name"><?php the_field('author_name'); ?></p>
+                                            <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
                                         </div>
                                         <span class="related_ic">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
@@ -182,7 +182,7 @@
 
                         <?php if ($i === 6) { ?>
                         <div class="card card_ads">
-                            <?php the_field('latest_content_section_ad', 5); ?>
+                            <?php echo wp_kses_post(get_field('latest_content_section_ad', 5)); ?>
                             <div class="ad_desc">AD</div>
                         </div>
                         <?php }
@@ -202,7 +202,7 @@
 
                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                 </h6>
-                                <div class="name"><?php the_field('author_name'); ?></div>
+                                <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                 <?php
                                 $cat_name = 'category';
                                 $cat = '';
@@ -227,7 +227,7 @@
 
                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a>
                                 </h6>
-                                <div class="name"><?php the_field('author_name'); ?></div>
+                                <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                 <!--<p class="cat">
                                             <?php
                                 $cat_name = 'category';

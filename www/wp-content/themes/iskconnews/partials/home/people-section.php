@@ -36,7 +36,7 @@
                                     </figure>
 
                                     <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                    <div class="name"><?php the_field('author_name'); ?></div>
+                                    <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                     <!--<p class="cat">
                                         <?php
                                                $cat_name = 'category';
@@ -64,7 +64,7 @@
                                     </figure>
 
                                     <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                    <div class="name"><?php the_field('author_name'); ?></div>
+                                    <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                     <!--<p class="cat">
                                         <?php
                                            $cat_name = 'category';

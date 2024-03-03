@@ -10,7 +10,7 @@
                                         get_template_part('partials/common/banner-section'); 
                                     ?> 
         <h5 class="title">Submit Your Story!</h5>
-                                    <?php the_field('top_section_content'); ?>                                   
+                                    <?php echo wp_kses_post(get_field('top_section_content')); ?>                                   
 
 
         <?php //echo do_shortcode('[story_form_request]'); ?>
@@ -34,7 +34,7 @@
                                     
                                 </div>
 
-                                <?php the_field('bottom_section_content'); ?>
+                                <?php echo wp_kses_post(get_field('bottom_section_content')); ?>
 
                                 <p class="mailbtn"> <a href="mailto:<?php the_field('submit_email_id'); ?>" target="_blank" class="btn hvr:outline bg--yellow c--white hvr:bg--blue hvr:c--white"><img src="<?php bloginfo('template_url') ?>/assets/img/icons/mailW.svg">Email Us</a></p>
                             </div>

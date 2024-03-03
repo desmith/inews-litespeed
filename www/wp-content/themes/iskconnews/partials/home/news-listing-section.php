@@ -37,8 +37,8 @@
                                        <div class="box">
                                            <div class="cat"><?php echo get_the_date( 'M d, Y' ); ?></span></div>
                                            <h6 class="ttl"><?php the_title(); ?></h6>
-                                           <div class="name"><?php the_field('author_name'); ?></div>
-                                           <div class="desc"><?php the_field('news_short_description'); ?></div>
+                                           <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
+                                           <div class="desc"><?php echo wp_kses_post(get_field('news_short_description')); ?></div>
                                        </div>
                                    </div>
                                </div>
@@ -88,7 +88,7 @@
                                             <span><?php echo get_the_date( 'M d, Y' ); ?></span>
                                         </div>
                                         <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                        <div class="name"><?php the_field('author_name'); ?></div>
+                                        <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                                 <span><?php echo get_the_date( 'M d, Y' ); ?></span>
 											</div>
                                            <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                           <div class="name"><?php the_field('author_name'); ?></div>
+                                           <div class="name"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                        </div>
                                    </div>
                                </div>

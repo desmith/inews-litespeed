@@ -61,8 +61,8 @@ $term_id = $queried_object->term_id;
                                                 <div class="box">
                                                    <p class="cat"><?php echo get_the_date( 'M d, Y' ); ?></span></p>
                                                    <h6 class="ttl"><?php the_title(); ?></h6>
-                                                   <p class="name"><?php the_field('author_name'); ?></p>
-                                                   <p class="desc"><?php the_field('news_short_description'); ?></p>
+                                                   <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
+                                                   <p class="desc"><?php echo wp_kses_post(get_field('news_short_description')); ?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -77,8 +77,8 @@ $term_id = $queried_object->term_id;
                                            <div class="box">
                                                <p class="cat"><?php echo get_the_date( 'M d, Y' ); ?></span></p>
                                                <h6 class="ttl"><?php the_title(); ?></h6>
-                                               <p class="name"><?php the_field('author_name'); ?></p>
-                                               <p class="desc"><?php the_field('news_short_description'); ?></p>
+                                               <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
+                                               <p class="desc"><?php echo wp_kses_post(get_field('news_short_description')); ?></p>
                                            </div>
                                        </div>
                                    </div>
@@ -147,7 +147,7 @@ $term_id = $queried_object->term_id;
                                                     ?>
                                                 </p>
                                                 <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                                <p class="name"><?php the_field('author_name'); ?></p>
+                                                <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
                                             </div>
                                         </div>
                                     <?php }else{ ?>
@@ -176,7 +176,7 @@ $term_id = $queried_object->term_id;
                                                 ?>
                                             </p>
                                            <h6 class="ttl"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-                                           <p class="name"><?php the_field('author_name'); ?></p>
+                                           <p class="name"><?php echo wp_kses_post(get_field('author_name')); ?></p>
                                        </div>
                                    </div>
                                                    

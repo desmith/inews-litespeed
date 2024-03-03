@@ -25,7 +25,7 @@
                                 <a href="javascript:void(0);" class="play_btn videoBoxBtn" data-vlink="<?php the_field('video_link'); ?>"><img src="<?php echo $banner_image; ?>" alt="big-img" /></a>
                                 </figure>
                                 <div class="content">
-                                    <div class="cat"><?php the_field('author_name'); ?></div>
+                                    <div class="cat"><?php echo wp_kses_post(get_field('author_name')); ?></div>
                                     <h5 class="sttl"><?php the_title() ?></h5>
                                     <a href="javascript:void(0);" class="play_btn videoBoxBtn" data-vlink="<?php the_field('video_link'); ?>">
                                       <span>Play</span>
