@@ -4273,7 +4273,6 @@ header{
 
 
 .submit_accord {
-  display:none;
   margin-top: 50px;
 
   .box {
@@ -4848,7 +4847,7 @@ header{
 }
 
 .iskcon_submit {
-  padding-top: 60px !important;
+  padding-top: 40px !important;
 
   .inner-container {
     @media (max-width: 875px) {
@@ -5394,3 +5393,20 @@ header{
   }
 }
 
+.submit_container_new {
+	.iskn {
+		img { width: 100%;}
+		
+		h5 {
+			padding-top: 20px;
+		}
+		
+		p {
+			margin-bottom: 15px;
+			font-size: 14px;
+			line-height: 1.5;
+			font-weight: 400;
+		}
+	}
+	
+}
