@@ -16,7 +16,7 @@
 
 								<?php
 									get_template_part('partials/submit-news/content-details');
-									get_template_part('partials/submit-news/right-section');
+									// get_template_part('partials/submit-news/right-section');
 								?>
 
         			</div>

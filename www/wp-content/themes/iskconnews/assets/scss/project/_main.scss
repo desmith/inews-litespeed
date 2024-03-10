@@ -4271,7 +4271,9 @@ header{
   }
 }
 
+
 .submit_accord {
+  display:none;
   margin-top: 50px;
 
   .box {
@@ -4846,7 +4848,7 @@ header{
 }
 
 .iskcon_submit {
-  padding-top: 40px !important;
+  padding-top: 60px !important;
 
   .inner-container {
     @media (max-width: 875px) {
@@ -5391,3 +5393,4 @@ header{
     }
   }
 }
+
